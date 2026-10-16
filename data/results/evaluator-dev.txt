@@ -1,0 +1,7 @@
+dev   seq01.mp4 esperado=SEM ACIDENTE  obtido=SEM ACIDENTE  eventos=0 ACERTOU
+dev   seq03.mp4 esperado=INDETERMINADO obtido=INDETERMINADO eventos=1 ACERTOU
+dev   seq04.mp4 esperado=TRASEIRA      obtido=TRASEIRA      eventos=1 ACERTOU
+dev   seq07.mp4 esperado=SEM ACIDENTE  obtido=SEM ACIDENTE  eventos=0 ACERTOU
+dev   seq08.mp4 esperado=LATERAL       obtido=LATERAL       eventos=1 ACERTOU
+dev   seq11.mp4 esperado=FRONTAL       obtido=FRONTAL       eventos=1 ACERTOU
+RESUMO dev: 6/6 corretos; FP=0; FN=0; erros_tipo=0; INDETERMINADO=1

@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "author": "Motiva Vision — FIAP 2CCPW",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 20,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-rgb-led",
+      "id": "rgb",
+      "top": 40,
+      "left": 340,
+      "attrs": {
+        "common": "cathode"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rr",
+      "top": 55,
+      "left": 190,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rg",
+      "top": 105,
+      "left": 190,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rb",
+      "top": 155,
+      "left": 190,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz",
+      "top": 210,
+      "left": 330,
+      "attrs": {
+        "volume": "0.1"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "fault",
+      "top": 300,
+      "left": 210,
+      "attrs": {
+        "color": "red",
+        "bounce": "0"
+      }
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd",
+      "top": -180,
+      "left": 180,
+      "attrs": {
+        "pins": "i2c"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX0",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX0",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "esp:D25",
+      "rr:1",
+      "red",
+      [
+        "h24"
+      ]
+    ],
+    [
+      "rr:2",
+      "rgb:R",
+      "red",
+      [
+        "h24",
+        "v-24"
+      ]
+    ],
+    [
+      "esp:D26",
+      "rg:1",
+      "green",
+      [
+        "h24"
+      ]
+    ],
+    [
+      "rg:2",
+      "rgb:G",
+      "green",
+      [
+        "h24",
+        "v-24"
+      ]
+    ],
+    [
+      "esp:D27",
+      "rb:1",
+      "blue",
+      [
+        "h24"
+      ]
+    ],
+    [
+      "rb:2",
+      "rgb:B",
+      "blue",
+      [
+        "h24",
+        "v-24"
+      ]
+    ],
+    [
+      "rgb:COM",
+      "esp:GND.1",
+      "black",
+      [
+        "v24",
+        "h-60"
+      ]
+    ],
+    [
+      "esp:D14",
+      "bz:2",
+      "orange",
+      []
+    ],
+    [
+      "bz:1",
+      "esp:GND.1",
+      "black",
+      [
+        "v24",
+        "h-60"
+      ]
+    ],
+    [
+      "esp:D15",
+      "fault:1.l",
+      "purple",
+      []
+    ],
+    [
+      "fault:2.l",
+      "esp:GND.1",
+      "black",
+      [
+        "v24",
+        "h-60"
+      ]
+    ],
+    [
+      "esp:D21",
+      "lcd:SDA",
+      "green",
+      [
+        "h-30",
+        "v-210"
+      ]
+    ],
+    [
+      "esp:D22",
+      "lcd:SCL",
+      "blue",
+      [
+        "h-30",
+        "v-210"
+      ]
+    ],
+    [
+      "esp:VIN",
+      "lcd:VCC",
+      "red",
+      [
+        "h-30",
+        "v-210"
+      ]
+    ],
+    [
+      "esp:GND.1",
+      "lcd:GND",
+      "black",
+      [
+        "h-30",
+        "v-210"
+      ]
+    ]
+  ]
+}

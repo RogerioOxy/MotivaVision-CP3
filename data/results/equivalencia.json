@@ -1,0 +1,116 @@
+{
+  "timestamp": "2026-10-16T19:12:47.105-03:00",
+  "reason": "alteração apenas de comentários: acentuação da docstring de parâmetros; lógica e limiares preservados",
+  "semantics_identical": true,
+  "parameters_identical": true,
+  "excluded_volatile_fields": [
+    "event_id",
+    "timestamp",
+    "quadro",
+    "processing_s"
+  ],
+  "changed_hashes": {
+    "vision/parameters.py": {
+      "before": "a58a3bb11d55bf32ed9d5a8fcf4b65c4abe285def0ddd66a19f5002b6a3395cf",
+      "after": "9b1237d9e2e24a57b0b975c0606022df5fa7e1851bb2eda06fb8adccbc9c7dc7"
+    }
+  },
+  "comparisons": [
+    {
+      "video": "seq01.mp4",
+      "split": "dev",
+      "obtained": "SEM ACIDENTE",
+      "score": null,
+      "rule": "SEM_EVENTO",
+      "identical": true
+    },
+    {
+      "video": "seq03.mp4",
+      "split": "dev",
+      "obtained": "INDETERMINADO",
+      "score": 0.284,
+      "rule": "M0",
+      "identical": true
+    },
+    {
+      "video": "seq04.mp4",
+      "split": "dev",
+      "obtained": "TRASEIRA",
+      "score": 0.727,
+      "rule": "M3",
+      "identical": true
+    },
+    {
+      "video": "seq07.mp4",
+      "split": "dev",
+      "obtained": "SEM ACIDENTE",
+      "score": null,
+      "rule": "SEM_EVENTO",
+      "identical": true
+    },
+    {
+      "video": "seq08.mp4",
+      "split": "dev",
+      "obtained": "LATERAL",
+      "score": 0.612,
+      "rule": "M2",
+      "identical": true
+    },
+    {
+      "video": "seq11.mp4",
+      "split": "dev",
+      "obtained": "FRONTAL",
+      "score": 0.832,
+      "rule": "M1",
+      "identical": true
+    },
+    {
+      "video": "seq02.mp4",
+      "split": "final",
+      "obtained": "SEM ACIDENTE",
+      "score": null,
+      "rule": "SEM_EVENTO",
+      "identical": true
+    },
+    {
+      "video": "seq05.mp4",
+      "split": "final",
+      "obtained": "SEM ACIDENTE",
+      "score": null,
+      "rule": "SEM_EVENTO",
+      "identical": true
+    },
+    {
+      "video": "seq06.mp4",
+      "split": "final",
+      "obtained": "FRONTAL",
+      "score": 0.757,
+      "rule": "M1",
+      "identical": true
+    },
+    {
+      "video": "seq09.mp4",
+      "split": "final",
+      "obtained": "SEM ACIDENTE",
+      "score": null,
+      "rule": "SEM_EVENTO",
+      "identical": true
+    },
+    {
+      "video": "seq10.mp4",
+      "split": "final",
+      "obtained": "TRASEIRA",
+      "score": 0.719,
+      "rule": "M4",
+      "identical": true
+    },
+    {
+      "video": "seq12.mp4",
+      "split": "final",
+      "obtained": "SEM ACIDENTE",
+      "score": null,
+      "rule": "SEM_EVENTO",
+      "identical": true
+    }
+  ]
+}

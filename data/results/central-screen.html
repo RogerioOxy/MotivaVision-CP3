@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Motiva Vision • Central</title>
+<style>
+body{font:16px system-ui;background:#eef2f5;color:#172b39;margin:0}
+header{background:#102b3e;color:white;padding:24px}
+main{max-width:1100px;margin:24px auto;padding:0 16px}
+article{background:white;padding:22px;margin:18px 0;border-left:5px solid #e9aa22}
+img{width:320px;max-width:100%}button,input{font:inherit;padding:8px;margin:4px}
+button{cursor:pointer}small{display:block}a{color:#006c86}
+.status{padding:14px;background:#dce9f0}.preliminar{background:#fff0b8;padding:8px}
+.confirmada{background:#f9d4d4;padding:8px}
+</style>
+<header><h1>Motiva Vision</h1>Central de demonstração • recursos fictícios</header>
+<main><div class="status">
+Transporte: MEMORIA_OFFLINE • CONECTADO
+• ESP32: CONFIRMADO • EM CONTATO<br>
+Último contato: 2026-10-16T19:28:13.241-03:00 • idade: 0.0 s
+(mais de 7.0 s = desatualizado) • <br></div>
+<p><a href="/status.json">Estado JSON</a> • <a href="/export.json">Histórico JSON</a>
+• <a href="/export.csv">Histórico CSV</a> • <a href="/">Atualizar</a>
+<label><input id="auto" type="checkbox" checked>Atualizar a cada 5 s</label></p>
+<p>Recomendação fictícia: não é protocolo médico e não aciona serviço real.
+SUSPEITA é preliminar; CONFIRMADO depende da decisão humana e do ACK do ESP32.</p>
+
+<article><h2>TRASEIRA • CONFIRMADO</h2>
+<small>evt-test-001 • 2026-10-16T19:28:13.188-03:00</small>
+<p>Rodovia fictícia, km 1 • câmera CAM-TEST</p>
+<p>Confiança: 0.95 • ALTA.
+Índice heurístico não probabilístico</p><p>{&#39;veiculos_envolvidos&#39;: 2, &#39;faixa_possivelmente_obstruida&#39;: &#39;sim&#39;, &#39;veiculo_imobilizado&#39;: True, &#39;tempo_parado_s&#39;: 1.0}</p>
+<p><strong>Regra M4: EQUIPE_OPERACIONAL</strong><br>
+Traseira/lateral com imobilização: avaliação operacional fictícia.</p>
+
+<p class="confirmada">Confirmação HUMANA registrada. A aplicação no ESP32
+é demonstrada somente pela fase APLICADO abaixo.</p>
+<img src="/evidence/test.jpg" alt="Quadro anotado">
+<p>Instante: 3.5 s. Evidência de teste</p>
+<form method="post" action="/decision/evt-test-001">
+<input type="hidden" name="csrf" value="ce7f6d6d36ccc7c78ae1632c6415bdd6f02d319140e03312">
+<input name="operator" placeholder="Identificação fictícia do operador" required maxlength="80">
+
+<button name="action" value="ENCERRAR">Encerrar e voltar a NORMAL</button>
+</form>
+<small>Sinalização: ATIVA. A fila avança somente após NORMAL/APLICADO.
+Rejeição em fila aguarda NORMAL para registrar o encerramento no ESP32.</small>
+
+<p>CONFIRMAR por OP em 2026-10-16T19:28:13.213-03:00</p>
+
+<div><strong>Comando 9d7d7536-ba66-4007-b71c-5a7847d814fc • SUSPEITA</strong>
+<p class="preliminar">Sinalização só PRELIMINAR: amarelo piscando.</p>
+
+<ul><li>comando ENVIADO (aguardando ESP32): 2026-10-16T19:28:13.216-03:00
+ • envio já reconhecido</li>
+<li>RECEBIDO pelo ESP32: 2026-10-16T19:28:13.217-03:00</li>
+<li>APLICADO pelo ESP32: 2026-10-16T19:28:13.221-03:00</li></ul>
+<p>Última fase: APLICADO em 2026-10-16T19:28:13.222-03:00. Horários acima são da central;
+o timestamp original do dispositivo permanece no histórico de ACKs.</p></div>
+
+<div><strong>Comando b2bcf1d4-e5af-49c8-811a-aa2f1aec33c9 • CONFIRMADO</strong>
+<p class="confirmada">Alvo de sinalização CONFIRMADA:
+vermelho + buzzer. Execução depende da fase APLICADO.</p>
+
+<ul><li>comando ENVIADO (aguardando ESP32): 2026-10-16T19:28:13.228-03:00
+ • envio já reconhecido</li>
+<li>RECEBIDO pelo ESP32: 2026-10-16T19:28:13.230-03:00</li>
+<li>APLICADO pelo ESP32: 2026-10-16T19:28:13.233-03:00</li></ul>
+<p>Última fase: APLICADO em 2026-10-16T19:28:13.233-03:00. Horários acima são da central;
+o timestamp original do dispositivo permanece no histórico de ACKs.</p></div>
+</article>
+
+</main><script>
+setInterval(()=>{
+  if(document.getElementById('auto').checked &&
+     !document.activeElement.matches('input,button')) location.reload();
+},5000);
+</script></html>

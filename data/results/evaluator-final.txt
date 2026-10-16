@@ -1,0 +1,7 @@
+final seq02.mp4 esperado=LATERAL       obtido=LATERAL       eventos=1 ACERTOU
+final seq05.mp4 esperado=SEM ACIDENTE  obtido=SEM ACIDENTE  eventos=0 ACERTOU
+final seq06.mp4 esperado=FRONTAL       obtido=FRONTAL       eventos=1 ACERTOU
+final seq09.mp4 esperado=INDETERMINADO obtido=INDETERMINADO eventos=1 ACERTOU
+final seq10.mp4 esperado=TRASEIRA      obtido=TRASEIRA      eventos=1 ACERTOU
+final seq12.mp4 esperado=SEM ACIDENTE  obtido=SEM ACIDENTE  eventos=0 ACERTOU
+RESUMO final: 6/6 corretos; FP=0; FN=0; erros_tipo=0; INDETERMINADO=1

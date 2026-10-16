@@ -1,0 +1,710 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Motiva Vision — CP3</title><style>@page{size:A4;margin:16mm 15mm 17mm}*{box-sizing:border-box}
+body{font:10pt/1.48 Arial,sans-serif;color:#193447;max-width:1040px;margin:28px auto;padding:0 16px}
+h1{font-size:32pt}h2{font-size:18pt;margin-top:22pt;border-bottom:2px solid #1c647c;padding-bottom:5pt}
+h3{font-size:13pt;margin-top:18pt}h4{font-size:11pt;margin-top:14pt}
+h1,h2,h3,h4{break-after:avoid}p,li{orphans:3;widows:3}
+table{border-collapse:collapse;width:100%;font-size:8pt;line-height:1.35;margin:12px 0;table-layout:fixed}
+th,td{border:1px solid #b7cbd6;padding:5px;overflow-wrap:anywhere;vertical-align:top}
+th{background:#e5eef3}thead{display:table-header-group}tr{break-inside:avoid}
+img{display:block;max-width:100%;max-height:150mm;width:auto;height:auto;margin:0 auto;object-fit:contain}
+figure{break-inside:avoid;margin:16px 0}figure img{max-height:135mm}
+figure.central img{max-height:110mm}figure.device img{max-height:none;width:100%}
+.device-grid{display:grid;grid-template-columns:1fr 1fr;gap:4mm;align-items:start}
+.device-grid figure{margin:3mm 0}.device-grid figcaption{font-size:8pt}
+.device-grid{break-inside:auto}.device-grid figure:last-child{grid-column:1/3;width:50%;justify-self:center}
+.evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+.evidence-grid figure{margin:2mm 0}.evidence-grid img{max-height:58mm}
+figcaption{font-size:9pt;margin:8px auto;max-width:165mm}a{color:#006c86;overflow-wrap:anywhere}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eff4f7;padding:9px;font-size:8pt}
+code{overflow-wrap:anywhere}strong{color:#8c2c17}.eyebrow{letter-spacing:2px;font-size:11pt}
+.cover{padding:30mm 8mm 15mm;border-top:8px solid #1c647c;min-height:245mm}
+.cover h2{border:0;font-size:19pt}.cover p{font-size:12pt}.cover .subtitle{font-size:19pt}.toc ul{padding-left:18px}
+@media print{body{margin:0;padding:0;max-width:none}h2{break-before:page}
+.cover{break-after:page}.cover h2,.contents h2{break-before:auto}
+.contents{break-after:page}figure.central{break-before:auto}
+a{color:inherit}th,pre{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head><body><div class="cover">
+<h1 id="motiva-vision">Motiva Vision</h1>
+<p class="eyebrow">FIAP • EDGE COMPUTING • CP3</p>
+<p class="subtitle">Detecção de ocorrências e sinalização viária</p>
+<p><strong>Rogério Deligi Ferreira Filho — RM561942</strong><br />
+<strong>Maria Fernanda Garavelli Dantas — RM562686</strong><br />
+Turma 2CCPW • FIAP • Prof. Marcelo Fernando Morgantini • 16/10/2026</p>
+<p>Protótipo com dados e recursos fictícios; recomendações não constituem protocolo médico.</p>
+<p>Repositório: <a href="https://github.com/RogerioOxy/MotivaVision-CP3">RogerioOxy/MotivaVision-CP3</a>.<br />
+Projeto Wokwi: PENDENTE_LINK_WOKWI.</p>
+<p>Coleta real do simulador: 16/10/2026, 18:37–18:44 (−03:00).<br />
+Avaliação final preservada: <strong>4/6</strong>. Dados inteiramente sintéticos.</p>
+</div>
+<div class="contents">
+<h2 id="sumario">Sumário</h2>
+<div class="toc">
+<ul>
+<li><a href="#sumario">Sumário</a></li>
+<li><a href="#1-arquitetura-e-fronteiras-da-demonstracao">1. Arquitetura e fronteiras da demonstração</a></li>
+<li><a href="#2-visao-computacional-categorias-e-confianca">2. Visão computacional, categorias e confiança</a></li>
+<li><a href="#3-diversidade-dos-videos">3. Diversidade dos vídeos</a></li>
+<li><a href="#4-circuito-estados-e-execucao">4. Circuito, estados e execução</a></li>
+<li><a href="#5-central-protocolo-e-seguranca">5. Central, protocolo e segurança</a></li>
+<li><a href="#6-integracao-real-documentada">6. Integração real documentada</a></li>
+<li><a href="#7-resultados-reais-dev-separado-do-final">7. Resultados reais: dev separado do final</a></li>
+<li><a href="#8-analise-de-erros-limitacoes-e-melhorias">8. Análise de erros, limitações e melhorias</a></li>
+<li><a href="#9-reproducao-referencias-e-links">9. Reprodução, referências e links</a></li>
+<li><a href="#anexo-a-quadros-anotados-gerados-da-execucao">Anexo A. Quadros anotados gerados da execução</a></li>
+</ul>
+</div>
+</div>
+<h2 id="1-arquitetura-e-fronteiras-da-demonstracao">1. Arquitetura e fronteiras da demonstração</h2>
+<p>Vídeos sintéticos locais alimentam visão clássica. O detector emite um JSON por episódio,
+com tipo, índice heurístico, indicadores e referência a JPG com instante. MQTT entrega
+à central Flask; SQLite conserva decisões, outbox e ACKs. Um operador fictício confirma
+ou rejeita. A dona da fila recebe SUSPEITA preliminar automaticamente; confirmação
+libera CONFIRMADO, rejeição e encerramento liberam NORMAL. FIFO avança após APLICADO.
+O ESP32 devolve RECEBIDO/APLICADO. Exportações JSON/CSV não dependem da página aberta.</p>
+<p><img alt="Arquitetura" src="arquitetura.svg" /></p>
+<p>A cadeia offline usa MQTT em memória e modelo Python do dispositivo. Não comprova
+Wi-Fi, broker real, circuito ou firmware. Os 33 arquivos de evidência documentam
+o ensaio de 16/10/2026 com o firmware no Wokwi, broker público, central e detector.
+O protótipo não foi testado em hardware físico.
+Não há clip de evidência; há JPG anotado e vídeo completo para reprodução.</p>
+<h2 id="2-visao-computacional-categorias-e-confianca">2. Visão computacional, categorias e confiança</h2>
+<h3 id="visao-calibracao-e-limites">Visão, calibração e limites</h3>
+<p>O detector recebe pixels BGR e tempo decodificado do vídeo. Não importa o gerador nem abre rótulos; não interpreta nome, semente ou metadados de cenário. <code>tools/evaluate.py</code> é o único consumidor dos rótulos na cadeia de decisão. Testes e relatório podem ler o manifesto para verificar diversidade e resultados.</p>
+<h4 id="cenas-e-protocolo-experimental">Cenas e protocolo experimental</h4>
+<p>São 12 vídeos neutros, 20 fps, 480×320, com duração de 6,6 a 9,4 s: seis colisões (duas de cada categoria), quatro negativos e dois ambíguos. Cada conjunto tem três colisões, dois negativos e um ambíguo. Impactos ocorrem entre 2,4 e 5,0 s, em posições diferentes, com sentidos opostos, automóveis e veículos longos, ângulos laterais de 55°/125° e tráfego não envolvido. Há cenas com quatro/cinco veículos e com cores praticamente iguais. <code>data/labels.json</code> registra cada parâmetro para auditoria; a classificação não recebe esses dados.</p>
+<p>Negativos: passagem em sentidos opostos; frenagem forte com tráfego em outra faixa; veículo parado no acostamento; ultrapassagem rente sem redução brusca de velocidade. No ambíguo dev, os veículos colidem sob chuva, redução local de iluminação e borrão, permanecendo rastreáveis. No final, um pilar encobre parte dos veículos e a região de possível contato; o restante da via permanece visível. As duas cenas exigem raciocínio temporal, sem apagar globalmente a imagem.</p>
+<p>A cinemática modela aproximação, contato geométrico, dissipação exponencial, parada e pequena rotação lateral. Não reproduz deformações, pneus ou dinâmica de um veículo real. A câmera é ortográfica e o tremor é subpixel; não há validação em perspectiva ou câmera móvel.</p>
+<h4 id="segmentacao-e-rastreamento">Segmentação e rastreamento</h4>
+<p>A mediana espacial de 71×71 do primeiro quadro estima o fundo. Subtração em tons de cinza com diferença &gt;28 e abertura 3×3 remove ruído e marcas finas. Esse fundo permanece fixo para não absorver veículos parados. Não há bin de matiz, classe por cor ou cor reservada a um ator. Um veículo pode ser cinza. Essa escolha é adequada apenas à via sintética uniforme: objetos grandes, fundo com texturas e iluminação variável podem contaminar a estimativa.</p>
+<p>Componentes conectados são associados ao centro previsto pela velocidade recente, com penalidade para mudança de área. Se um componente contém dois centros previstos, uma partição espacial recupera os dois rastros. A confiança de visibilidade cai nessa fusão. Não se afirma identidade perfeita sob oclusão longa; o teste de blob fundido é curto e controlado.</p>
+<h4 id="evidencia-temporal-e-confianca">Evidência temporal e confiança</h4>
+<p>Candidato: distância entre contornos ≤25 px, aproximação radial &gt;12 px/s e ambos os veículos em movimento (&gt;8 px/s). Contato observado acumula somente quando a distância entre contornos é ≤10 px. Aguarda 1,45 s após início do candidato, exige proximidade por ≥0,20 s e razão de velocidade pós/pré ≤0,55. Sem queda de velocidade, aproximação rente não é colisão. Esses portões abrem a análise; não tornam os termos abaixo binários.</p>
+<p>Com <code>clip(z)=min(1,max(0,z))</code>, os termos contínuos são:</p>
+<ul>
+<li>A = clip((aproximação − 12)/55), em px/s: margem acima da aproximação mínima.</li>
+<li>C = clip(contato_observado_s/0,80): duração da evidência de contato, não simples overlap.</li>
+<li>D = clip(1 − velocidade_pós/velocidade_pré): intensidade da redução de movimento.</li>
+<li>I = clip(tempo_parado_s/0,65): persistência da imobilização pós-evento.</li>
+<li>M = clip((|cos|−0,65)/0,35) para frontal/traseira; clip((0,65−|cos|)/0,65) para lateral: distância das fronteiras angulares.</li>
+<li>Q = nitidez × contraste × visibilidade. Nitidez = clip(variância do Laplaciano/160); contraste = clip((percentil95−percentil20)/85). A imagem é recortada à união dos veículos mais 12 px. Visibilidade compara a área atual à maior área observada e aplica fator 0,85 na divisão de blob fundido.</li>
+</ul>
+<p><strong>S = (0,20 A + 0,20 C + 0,25 D + 0,15 I + 0,20 M) × (0,30 + 0,70 Q).</strong></p>
+<p>S é um índice heurístico [0,1], não probabilidade de acidente, gravidade ou diagnóstico. Todos os termos são registrados no payload. Cos &lt;−0,65 → FRONTAL; cos &gt;0,65 → TRASEIRA; restante → LATERAL. S &lt;0,60 → INDETERMINADO com medidas e motivo no evento. Não há ocorrência automática só porque a qualidade global caiu.</p>
+<p>No dev inicial, janela de 0,95 s e limiar de 0,68 produziram 4/6: a decisão antecedia observação suficiente de parada. A janela foi ampliada para 1,45 s e o limiar ficou em 0,60: dev ambíguo 0,284; menor colisão 0,612. A margem de apenas 0,012 da lateral evidencia sensibilidade. Não foi feita otimização estatística: é calibração exploratória em seis simulações. <code>calibration.json</code> guarda parâmetros, instante e hashes dos fontes, manifesto e vídeos. O final só roda se esses bytes continuam iguais. Não houve ajuste após os erros finais.</p>
+<h4 id="indicadores-e-calibracao-da-via">Indicadores e calibração da via</h4>
+<p>CAM-SIM-01 usa coordenadas ortográficas fixas. As quatro faixas são os intervalos verticais [65,120), [120,175), [175,230), [230,285) px; dois sentidos por metade da pista. Fora desses intervalos é acostamento. A geometria é uma calibração da cena, não uma detecção universal de faixas. Não convertemos pixels em metros.</p>
+<p>A quantidade envolvida começa com o par que perdeu movimento. Outros rastros entram somente se estavam em movimento antes, estão parados depois e ficaram a menos de 100 px da região. Tráfego distante não é somado. Imobilizado = velocidade &lt;10 px/s; tempo parado é observado no histórico. Uma faixa está <strong>possivelmente</strong> obstruída quando pelo menos 30% da altura da caixa do veículo imobilizado a intersecta. Isso não prova bloqueio integral ou impossibilidade de passagem. Os campos incluem quantidade, faixas, imobilização e duração da parada; não há inferência de vítimas.</p>
+<p>Matriz ordenada, fictícia e sem valor de protocolo médico:</p>
+<table>
+<thead>
+<tr>
+<th>Regra</th>
+<th>Tipo + evidência</th>
+<th>Recurso sugerido para decisão humana</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M0</td>
+<td>INDETERMINADO ou confiança insuficiente</td>
+<td>Revisão humana sem concluir tipo/gravidade</td>
+</tr>
+<tr>
+<td>M1</td>
+<td>FRONTAL, ≥2 envolvidos e imobilização</td>
+<td>Avaliação prioritária / resgate simulado</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>LATERAL e faixa possivelmente obstruída</td>
+<td>Ambulância simulada</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>TRASEIRA e ≥3 envolvidos</td>
+<td>Ambulância simulada</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>TRASEIRA/LATERAL e imobilização, após regras anteriores</td>
+<td>Equipe operacional</td>
+</tr>
+<tr>
+<td>M5</td>
+<td>Nenhuma combinação sustentada</td>
+<td>Revisão humana</td>
+</tr>
+</tbody>
+</table>
+<p>A regra disparada é persistida no evento e recalculada pela central. Os testes contrafactuais variam indicadores mantendo o tipo e demonstram mudança de regra. Há regras diferentes realmente exercidas nos vídeos; a avaliação final não foi modificada para completar a matriz.</p>
+<h4 id="deduplicacao-e-erros-observados">Deduplicação e erros observados</h4>
+<p>Distância de agrupamento &lt;140 px e intervalo &lt;8 s vêm somente de <code>vision/parameters.py</code>. O agrupamento é por sessão, não uma identidade global persistente: um episódio muito longo pode repetir depois da janela e dois incidentes próximos podem ser unidos. Cada vídeo com ocorrência nesta execução emitiu um único event_id.</p>
+<p>No final, seq02 (lateral junto ao acostamento/topo) retornou SEM ACIDENTE: falso negativo. Seq09 (contato encoberto) também retornou SEM ACIDENTE, em vez de INDETERMINADO. O diagnóstico posterior, sem alterar fontes congelados, registrou <strong>zero candidatos temporais elegíveis nas duas cenas</strong>; <code>final-diagnostics.json</code> mostra veículos visíveis, inclusive visibilidade parcial no topo/atrás do pilar. Hipótese: recorte e contato oblíquo/oculto impedem os portões geométricos e cinemáticos antes de chegar ao escore. Não é correto atribuir a segunda falha a um escore baixo: nenhum escore foi emitido. R2 está parcialmente atendido (chuva dev funciona; oclusão final falha). Reduzir cegamente os portões poderia aumentar falsos positivos e não foi tentado após o final.</p>
+<p>Nos negativos e nesses dois erros, score é N/A e regra SEM_EVENTO: não existe payload para pontuar. SEM ACIDENTE significa apenas ausência de gatilho neste algoritmo, e o falso negativo mostra por que isso não garante segurança real. A melhoria futura seria uma classe de dúvida por perda temporal localizada de rastros, calibrada em um novo dev e avaliada em um novo conjunto final independente.</p>
+<h4 id="erro-de-indicador-constatado-na-integracao">Erro de indicador constatado na integração</h4>
+<p>Na seq04 há quatro veículos em cena e dois envolvidos no gabarito, mas o evento
+registrou <code>veiculos_envolvidos: 3</code>. Isso acionou M3/AMBULANCIA_SIMULADA.
+O avaliador por tipo conta TRASEIRA como acerto e não mede esse erro.
+O agrupamento pode incorporar um rastro próximo/parado ou fragmentado;
+a participação causal de cada rastro não foi demonstrada. A causa exata não
+foi isolada. Propõe-se gabarito de participação por ator, erro de contagem,
+precisão/recall dos envolvidos, obstrução e regra sugerida. Nenhuma alteração
+do detector foi feita após a avaliação final. Evidência: JSON da seq04 e
+histórico em <code>docs/evidencias/integracao/</code>; detalhes em INTEGRACAO.md.</p>
+<h2 id="3-diversidade-dos-videos">3. Diversidade dos vídeos</h2>
+<p>A tabela seguinte é produzida diretamente do manifesto do gerador, sem redigir resultados manualmente.</p>
+<table><thead><tr><th>Vídeo / conjunto</th><th>Situação</th><th>Duração s</th><th>Referência s</th><th>Atores</th></tr></thead><tbody><tr><td>seq01.mp4 / dev</td><td>normal</td><td>6.8</td><td>2.0</td><td>5</td></tr><tr><td>seq02.mp4 / final</td><td>lateral</td><td>8.6</td><td>4.5</td><td>4</td></tr><tr><td>seq03.mp4 / dev</td><td>rain</td><td>7.4</td><td>3.6</td><td>4</td></tr><tr><td>seq04.mp4 / dev</td><td>rear</td><td>7.2</td><td>2.4</td><td>4</td></tr><tr><td>seq05.mp4 / final</td><td>braking</td><td>8.8</td><td>3.1</td><td>4</td></tr><tr><td>seq06.mp4 / final</td><td>front</td><td>6.6</td><td>2.8</td><td>3</td></tr><tr><td>seq07.mp4 / dev</td><td>parked</td><td>8.0</td><td>3.0</td><td>5</td></tr><tr><td>seq08.mp4 / dev</td><td>lateral</td><td>7.8</td><td>3.2</td><td>3</td></tr><tr><td>seq09.mp4 / final</td><td>occlusion</td><td>9.4</td><td>5.0</td><td>4</td></tr><tr><td>seq10.mp4 / final</td><td>rear</td><td>8.2</td><td>3.7</td><td>3</td></tr><tr><td>seq11.mp4 / dev</td><td>front</td><td>9.0</td><td>4.1</td><td>4</td></tr><tr><td>seq12.mp4 / final</td><td>near</td><td>7.6</td><td>3.4</td><td>5</td></tr></tbody></table>
+
+<p><img alt="Quadros das doze sequências" src="painel.jpg" /></p>
+<p>Quadros extraídos em impacto parametrizado +0,5 s (ou instante de referência nos negativos).
+O painel não substitui a reprodução temporal de cada vídeo.</p>
+<h2 id="4-circuito-estados-e-execucao">4. Circuito, estados e execução</h2>
+<p><img alt="Esquema do circuito" src="circuito.svg" /></p>
+<h3 id="esp32-no-wokwi">ESP32 no Wokwi</h3>
+<p>Firmware executado no simulador em 16/10/2026, 18:37–18:44 (−03:00).
+O registro do ensaio indica compilação sem erros e início sem aviso de Wi-Fi;
+o log integral de compilação não foi preservado.
+Resultados e limites: <a href="../INTEGRACAO.md">INTEGRACAO.md</a>. O endereço compartilhável
+fica no <a href="../LINKS.md#wokwi">cadastro de links, seção Wokwi</a>.</p>
+<h4 id="recriar-o-projeto-a-partir-de-esp32">Recriar o projeto a partir de esp32/</h4>
+<ol>
+<li>No Wokwi, crie um projeto Arduino <strong>ESP32 DevKit v1</strong>.</li>
+<li>Substitua <code>sketch.ino</code>, <code>diagram.json</code> e <code>libraries.txt</code> pelos três arquivos
+   homônimos de <code>esp32/</code>. Preserve a montagem do JSON.</li>
+<li>Use PubSubClient <strong>2.8</strong>, ArduinoJson <strong>7.4.2</strong> e LiquidCrystal I2C.
+   A versão exata da última não consta da coleta; registre-a na repetição.</li>
+<li>Confira Wi-Fi <code>Wokwi-GUEST</code>, sem senha, broker <code>broker.hivemq.com:1883</code>,
+   prefixo <code>motiva/561942/</code> igual ao da central.</li>
+<li>Com rede, inicie <code>.venv/Scripts/python -m central.app</code>, compile e inicie
+   a simulação. Abra <code>http://127.0.0.1:5000</code> e espere NORMAL após heartbeat.</li>
+<li>Salve na conta do responsável, copie o link compartilhável para o cadastro.</li>
+</ol>
+<h4 id="ligacoes">Ligações</h4>
+<table>
+<thead>
+<tr>
+<th>Pino ESP32</th>
+<th>Componente</th>
+<th>Ligação complementar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPIO25</td>
+<td>resistor 220 Ω → canal R do RGB</td>
+<td>cátodo comum → GND</td>
+</tr>
+<tr>
+<td>GPIO26</td>
+<td>resistor 220 Ω → canal G do RGB</td>
+<td>mesmo GND</td>
+</tr>
+<tr>
+<td>GPIO27</td>
+<td>resistor 220 Ω → canal B do RGB</td>
+<td>mesmo GND</td>
+</tr>
+<tr>
+<td>GPIO14</td>
+<td>positivo do buzzer piezo</td>
+<td>negativo → GND</td>
+</tr>
+<tr>
+<td>GPIO15</td>
+<td>botão de injeção</td>
+<td>outro contato → GND; INPUT_PULLUP</td>
+</tr>
+<tr>
+<td>GPIO21</td>
+<td>LCD SDA</td>
+<td>LCD I2C 0x27, 16×2</td>
+</tr>
+<tr>
+<td>GPIO22</td>
+<td>LCD SCL</td>
+<td>VCC → VIN/5 V virtual; GND comum</td>
+</tr>
+</tbody>
+</table>
+<p>DevKit alimentado pelo simulador. Não conectar GPIO a 5 V. Buzzer piezo virtual;
+carga real maior exigiria estágio de acionamento. SVG segue <code>diagram.json</code>:
+LCD acima (−180, 180), ESP32 à esquerda (20, 0), resistores em coluna,
+RGB à direita (40, 340), buzzer (210, 330), botão (300, 210), posições (top, left).
+Fotos mostram a montagem em execução; o SVG é ilustrativo.</p>
+<h4 id="estados-fila-e-memoria">Estados, fila e memória</h4>
+<p>NORMAL verde; SUSPEITA amarelo preliminar a cada 400 ms; CONFIRMADO vermelho
+com buzzer (1 kHz, 150 ms/1,2 s); FALHA roxo a cada 150 ms, tempos do simulador.
+LCD mostra estado e cinco caracteres do evento <strong>ativo</strong>, ou traço; segunda
+linha: fase e motivo <code>sem MQTT</code>, <code>sem heartbeat</code> ou <code>NVS</code> em FALHA.
+Laço usa millis/micros; rede síncrona em tarefa FreeRTOS com backoff.
+Uma tarefa inicia Wi-Fi e não repete begin durante tentativa em andamento.</p>
+<p>Só um evento sinaliza por vez; todos ficam na central em FIFO persistente.
+A dona da fila recebe SUSPEITA automática. CONFIRMAR gera CONFIRMADO;
+REJEITAR/ENCERRAR gera NORMAL. A próxima vaga depende de NORMAL/APLICADO.
+Rejeição em fila fica registrada e recebe NORMAL quando promovida.
+RECUSADO bloqueia avanço para inspeção. Simultaneidade tem testes offline;
+não foi exercitada no Wokwi nesta coleta.</p>
+<p>Anel de 64 command_ids em NVS; eventos encerrados em lista separada sem expulsão
+deliberada. IDs antigos expulsos podem voltar a atuar em evento ainda ativo;
+encerrado não reabre enquanto tombstones persistirem. Memória é finita e falha
+de gravação causa FALHA. Reinício/NVS/energia e mais de 64 comandos no firmware
+continuam sem teste real nesta coleta; o modelo Python não os comprova.</p>
+<h4 id="repetir-os-oito-testes-do-enunciado">Repetir os oito testes do enunciado</h4>
+<ol>
+<li><strong>Categorias:</strong> confrontar seis acidentes das 12 sequências com o gabarito
+   separado; dev reconheceu três categorias, lateral final falha.</li>
+<li><strong>Negativos:</strong> passagem normal, frenagem, parada no acostamento e aproximação
+   rente devem ter zero evento. Na integração seq01 foi publicada sem ocorrência.</li>
+<li><strong>Visibilidade:</strong> seq03 deve emitir INDETERMINADO/revisão; seq09 é erro conhecido.</li>
+<li><strong>Persistência da ocorrência:</strong> conferir um event_id por episódio e contagens
+   do avaliador; executar teste de deduplicação espaço-temporal.</li>
+<li><strong>Decisões:</strong> publicar seq04 com <code>--publish</code>, esperar SUSPEITA amarela,
+   identificar operador fictício e CONFIRMAR. ENCERRAR; publicar seq11 e REJEITAR.
+   Conferir NORMAL e histórico. Status 02/03/05/06 e diário documentam a coleta.</li>
+<li><strong>Comunicação:</strong> GPIO15 fecha TCP sem DISCONNECT por 15 s do simulador;
+   conferir LWT/FALHA/SEM CONTATO e recuperação. Separadamente parar central
+   por mais de 7 s do simulador, conferir FALHA por heartbeat e recuperação
+   após reinício. Não derrubar o broker público.</li>
+<li><strong>Duplicata:</strong> reenviar o mesmo command_id três vezes; ACKs repetidos,
+   contador inalterado. Após ENCERRAR, tentar CONFIRMAR mesmo event_id com ID
+   de comando novo: RECUSADO sem reabrir.</li>
+<li><strong>Cadeia completa:</strong> preservar detector, event_id, command_id, horários
+   ENVIADO/RECEBIDO/APLICADO da central e foto do ESP32. Exportar JSON/CSV/status.</li>
+</ol>
+<p>Tabelas do relatório são calculadas dos arquivos de evidência e avaliações congeladas.
+Latências usam horários da central; simulação rodou a 34%–46%.
+Fotos não medem frequências ou tempo real. Para novos ensaios, preserve a coleta
+original e guarde arquivos em diretório separado.</p>
+<h2 id="5-central-protocolo-e-seguranca">5. Central, protocolo e segurança</h2>
+<p>A tela mostra tipo, confiança, indicadores, regra, evidência e decisões com identificação/horário.
+ENVIADO (aguardando ESP32), RECEBIDO e APLICADO possuem horários separados, duráveis.
+A confirmação humana não prova aplicação elétrica. O endpoint /status.json permite coletar
+conexão, último contato, estado recebido e contagens. Testes usam Flask test_client;
+as capturas mostram a página real em Edge headless. Acessibilidade
+não foi avaliada sistematicamente.</p>
+<h3 id="protocolo-motiva-vision-versao-2">Protocolo Motiva Vision, versão 2</h3>
+<p>Somente simulação acadêmica com dados fictícios. Broker padrão <code>broker.hivemq.com:1883</code>, MQTT 3.1.1, sem TLS nesse endpoint público. Prefixo padrão <code>motiva/561942/</code>; alterável no Python por <code>MQTT_PREFIX</code> e no firmware pela constante <code>PREFIX</code>. Tópicos não são canais privados. Não enviar nomes de pessoas, localizações reais, credenciais ou imagens. No laboratório, identificar operador por código fictício.</p>
+<table>
+<thead>
+<tr>
+<th>Sufixo</th>
+<th>Origem → destino</th>
+<th style="text-align: right;">QoS publicação</th>
+<th style="text-align: right;">Assinatura</th>
+<th>Retained</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>eventos</td>
+<td>visão → central</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td>não</td>
+</tr>
+<tr>
+<td>comandos</td>
+<td>central → ESP32</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td>não</td>
+</tr>
+<tr>
+<td>ack</td>
+<td>ESP32 → central</td>
+<td style="text-align: right;">0 (limite de PubSubClient 2.8)</td>
+<td style="text-align: right;">1</td>
+<td>não</td>
+</tr>
+<tr>
+<td>status</td>
+<td>ESP32 → central</td>
+<td style="text-align: right;">0; LWT 1</td>
+<td style="text-align: right;">1</td>
+<td>sim</td>
+</tr>
+<tr>
+<td>heartbeat</td>
+<td>central → ESP32</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td>não</td>
+</tr>
+</tbody>
+</table>
+<p>QoS efetivo é o mínimo entre publicador e assinatura. QoS 1 pode duplicar mensagens; não significa atuação exatamente uma vez. ACKs do ESP32 podem se perder: a central reenvia comandos com o mesmo ID a cada dois segundos, e o ESP32 reenvia os dois ACKs sem atuar de novo. A visão aguarda PUBACK do broker, sem afirmar entrega à aplicação central. Eventos não retidos exigem central já assinando. A visão não possui outbox persistente; reiniciar a análise é uma nova sessão.</p>
+<h4 id="evento">Evento</h4>
+<p>Todos os campos abaixo são obrigatórios e validados em <code>central/protocol.py</code>. <code>SEM ACIDENTE</code> é resultado de análise sem evento e não é publicado no tópico de ocorrências.</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo, unidade e valores</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event_id</td>
+<td>string de 1–64 caracteres; UUID no detector; um por episódio na sessão</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>ISO 8601 com fuso; instante da detecção no computador, não data real da gravação</td>
+</tr>
+<tr>
+<td>camera_id</td>
+<td>string fictícia; padrão CAM-SIM-01</td>
+</tr>
+<tr>
+<td>local</td>
+<td>texto fictício, sem geolocalização real</td>
+</tr>
+<tr>
+<td>tipo</td>
+<td>TRASEIRA, FRONTAL, LATERAL, INDETERMINADO</td>
+</tr>
+<tr>
+<td>confianca.indice</td>
+<td>número finito entre 0 e 1, índice heurístico sem calibração probabilística</td>
+</tr>
+<tr>
+<td>confianca.nivel</td>
+<td>ALTA quando índice ≥0,60 (limiar em vision/parameters.py); INSUFICIENTE abaixo</td>
+</tr>
+<tr>
+<td>confianca.definicao</td>
+<td>explicação textual do índice</td>
+</tr>
+<tr>
+<td>indicadores.veiculos_envolvidos</td>
+<td>inteiro de 0 a 5 ou string desconhecido</td>
+</tr>
+<tr>
+<td>indicadores.faixa_possivelmente_obstruida</td>
+<td>sim, nao, desconhecido; hipótese geométrica, não inspeção real da pista</td>
+</tr>
+<tr>
+<td>recomendacao.regra / recurso / justificativa</td>
+<td>strings; a central recalcula pela matriz, ignorando a recomendação recebida</td>
+</tr>
+<tr>
+<td>estado</td>
+<td>SUSPEITA na emissão; estado do evento é controlado separadamente pela central</td>
+</tr>
+<tr>
+<td>evidencia.quadro</td>
+<td>referência a JPG local, nunca conteúdo binário/base64</td>
+</tr>
+<tr>
+<td>evidencia.tempo_video_s / frame</td>
+<td>segundos desde início e índice de quadro a partir de zero</td>
+</tr>
+<tr>
+<td>evidencia.observacao</td>
+<td>medidas temporais ou justificativa de incerteza</td>
+</tr>
+</tbody>
+</table>
+<p>As imagens precisam estar no mesmo computador da central em <code>data/evidence/</code>. O protocolo não transfere arquivos entre máquinas. O detector mede obstrução pela interseção das caixas de veículos
+imobilizados com faixas calibradas (limites y=65,120,175,230,285 px).
+Interseção de pelo menos 30% da altura marca a faixa; não prova bloqueio integral.
+Os indicadores adicionais são <code>faixas_obstruidas</code> (lista de 1–4),
+<code>veiculo_imobilizado</code> (booleano) e <code>tempo_parado_s</code> (segundos não negativos).
+A quantidade considera o par temporal e rastros próximos que perderam movimento,
+sem somar todo o tráfego. <code>confianca.termos</code> registra A/C/D/I/M contínuos;
+<code>qualidade_local</code> é Q [0,1]. Fórmula e matriz M0–M5: docs/VISAO.md.
+Nenhuma recomendação é protocolo médico.</p>
+<h4 id="comando-ack-e-estado">Comando, ACK e estado</h4>
+<p>Comando JSON: <code>event_id</code>, <code>command_id</code> (strings 1–64), <code>timestamp</code> ISO com fuso, <code>estado</code> NORMAL, SUSPEITA ou CONFIRMADO. FALHA é estado autônomo do dispositivo; a central não o comanda. O validador compartilhado admite os quatro estados na representação; o receptor recusa FALHA como comando de atuação.</p>
+<p>ACK repete <code>event_id</code>, <code>command_id</code>, <code>estado</code>, <code>timestamp</code> e acrescenta <code>fase</code>: RECEBIDO (parse e identificação), APLICADO (alvo aplicado pelo controlador) ou RECUSADO (transição/registro não permitido). <code>clock_sync</code> indica se o ESP32 obteve horário NTP. Antes de NTP, o timestamp do dispositivo usa época não sincronizada, com fuso +00:00; a central registra separadamente o horário local de recepção. O relógio do vídeo é sempre <code>tempo_video_s</code>, separado dos relógios dos computadores.</p>
+<p>A central persiste o comando como PENDENTE na mesma transação da decisão. Aceitação pelo cliente MQTT marca ENVIADO; esse estado não é confirmação do broker nem do atuador. O ACK RECEBIDO avança a fase; apenas APLICADO correspondente ao estado solicitado conclui. ACK desconhecido, event_id incompatível e estado aplicado incompatível são recusados. Repetições são idempotentes e ACK atrasado não regride APLICADO. RECUSADO termina retransmissões automáticas e exige inspeção do operador.</p>
+<p>O recebimento de uma ocorrência cria uma entrada FIFO persistente em SQLite.
+A primeira ocupa o sinalizador e gera SUSPEITA automaticamente. Todas aparecem
+na tela; somente a dona da sinalização pode ser confirmada. CONFIRMAR envia
+CONFIRMADO; REJEITAR envia NORMAL e registra REJEITADO; ENCERRAR após confirmação
+envia NORMAL e registra ENCERRADO. Operador e horário ficam no histórico.
+O formulário repetido não cria outro comando. A próxima entrada só ocupa o ESP32
+após NORMAL/APLICADO da anterior, nunca apenas ENVIADO ou RECEBIDO.</p>
+<p>Uma ocorrência em espera pode ser rejeitada imediatamente na central, mas seu
+NORMAL aguarda a vaga: quando promovida, recebe só NORMAL, que registra o evento
+encerrado no dispositivo sem acender a preliminar. A fila então avança após o ACK.
+Assim nenhuma ocorrência some da tela, nem uma rejeição reabre depois.
+A fila e a outbox sobrevivem ao reinício. A migração de histórico anterior conserva
+comandos/decisões existentes e prioriza ocorrência confirmada sobre suspeitas antigas.
+Um único comando fica em voo: SUSPEITA deve receber APLICADO antes de enviar
+CONFIRMADO ou NORMAL posteriores, inclusive quando o operador decide rapidamente.
+RECUSADO bloqueia a outbox para inspeção; não há avanço automático ou reset de histórico.</p>
+<p>ESTADOS: NORMAL = verde; SUSPEITA = amarelo intermitente preliminar antes da decisão;
+CONFIRMADO = vermelho + pulso sonoro; FALHA = roxo a cada 150 ms (amarelo: 400 ms).
+MQTT perdido ou heartbeat &gt;7 s do simulador leva a FALHA; recuperar exige MQTT e
+heartbeat novo, restaurando o alvo anterior. Não encerra silenciosamente.
+O LCD usa o evento ativo, ou “-” se vazio, nunca o evento do último ACK.
+Na FALHA, a segunda linha abrevia a fase (AP/RC/NG/IN) e mostra sem MQTT,
+sem heartbeat ou NVS. Fora da FALHA, mostra a fase completa.</p>
+<h4 id="deduplicacao-e-persistencia">Deduplicação e persistência</h4>
+<ul>
+<li>Evento na visão: agrupamento por distância &lt;140 pixels e intervalo &lt;8 segundos, na mesma sessão. Os vídeos duram 6,6–9,4 s, com uma região principal de ocorrência. Em produção, acidente longo ou nova sessão exige persistência/identidade mais sofisticada; a janela atual pode unir eventos próximos ou emitir outro após oito segundos.</li>
+<li>Evento na central: chave primária event_id, mensagem repetida não sobrescreve decisão humana.</li>
+<li>Comando: ID único criado uma vez por decisão, guardado na outbox SQLite. Repetições preservam os IDs.</li>
+<li>Firmware: anel NVS de 64 command_ids recentes; ao lotar substitui o mais
+  antigo e continua recebendo. ID recente só devolve ACK sem repetir ação.
+  Eventos encerrados ficam numa lista separada, nunca expulsa pelo anel. Não há
+  limite deliberado de 32 eventos; NVS é finita e falha de gravação causa FALHA
+  sem esquecer tombstones. A restauração limita o blob a 24 KiB: exceder exige
+  manutenção supervisionada. Não apagar a memória durante a demonstração.
+  Um command_id antigo expulso pode repetir atuação em evento ainda ativo;
+  a garantia é dos 64 recentes. Event_id encerrado recusa reabertura por qualquer ID.</li>
+<li>Modelo Python: mesma janela de 64 recentes e tombstones separados, só em memória.
+  Não emula flash, energia, capacidade física ou eletrônica.</li>
+</ul>
+<p>Status a cada dois segundos do simulador, retido, com LWT FALHA/offline.
+O botão fecha o socket TCP sem MQTT DISCONNECT por 15 s do simulador, permitindo
+ao broker emitir LWT; não derruba o broker público. Status retido e LWT não
+renovam o último contato vivo. A central mede idade com relógio monotônico real:
+ausência de contato, idade &gt;7 s, offline/LWT ou transporte desconectado mostram
+SEM CONTATO/FALHA tanto na página quanto no JSON. Novo contato vivo recupera o
+estado observado. Heartbeat da central a cada dois segundos reais, não retido.
+Client_ids têm sufixo aleatório; o ESP32 inclui parte do ID do chip.
+Broker/prefixo devem coincidir. Latências usam horários da central: INTEGRACAO.md.</p>
+<h4 id="escopo-de-seguranca">Escopo de segurança</h4>
+<p><code>.env</code> é ignorado no Git, <code>.env.example</code> contém apenas padrões públicos e vazios. Usuário/senha do MQTT podem ser configurados no cliente Python, mas o endpoint público em 1883 não protege esses valores em trânsito. Não usar credenciais privadas nele. Não há autenticação de origem no broker público: qualquer cliente pode forjar tráfego no prefixo. Isso impede uso operacional real; isolar prefixo e usar somente simulação. A página local usa escape HTML e token de formulário, mas não possui autenticação de usuários. Não publicar a central na internet.</p>
+<h4 id="fases-persistentes-e-estado-http">Fases persistentes e estado HTTP</h4>
+<p><code>command_phases</code> conserva o primeiro horário local de ENVIADO, RECEBIDO e APLICADO
+por command_id, inclusive após reiniciar. O ACK original mantém também o timestamp
+do dispositivo. ENVIADO é aceitação pelo cliente MQTT, não PUBACK nem atuação.
+A tela mostra cada etapa como pendente até haver registro.</p>
+<p><code>GET /status.json</code> retorna <code>transporte</code>, <code>conectado</code>, <code>ultimo_contato</code>,
+<code>idade_contato_s</code>, <code>dispositivo</code>, <code>erro</code> e <code>contagens</code> de eventos/comandos/decisões/ACKs.
+<code>dispositivo</code> contém estado efetivo calculado, <code>contato</code>, <code>desatualizado</code>,
+<code>timeout_s</code>, <code>motivo</code> e <code>ultimo_status</code> (payload original, que pode estar antigo).
+Assim <code>dispositivo.estado=FALHA</code> pode coexistir com <code>ultimo_status.estado=NORMAL</code>.
+É evidência do que a central observou, não autenticação do dispositivo.</p>
+<p>No broker público <strong>qualquer pessoa pode publicar nos nossos tópicos</strong>, inclusive
+forjar comandos e ACKs com IDs conhecidos. Validação de esquema, correlação de IDs,
+deduplicação e ausência de imagens reduzem erros e exposição, mas não autenticam origem.
+Em produção: broker privado com TLS, autenticação de cada cliente e ACL por tópico.</p>
+<h2 id="6-integracao-real-documentada">6. Integração real documentada</h2>
+<h3 id="integracao-wokwi-ensaio-de-16102026">Integração Wokwi — ensaio de 16/10/2026</h3>
+<h4 id="procedencia-e-condicoes">Procedência e condições</h4>
+<p>O ensaio foi realizado em <strong>16/10/2026, 18:37–18:44 (−03:00)</strong>:
+ESP32 DevKit v1 no Wokwi, Wi-Fi Wokwi-GUEST, broker real
+<code>broker.hivemq.com:1883</code>, central <code>python -m central.app</code> com banco novo e
+detector com <code>--publish</code>. O registro indica compilação sem erro e sem aviso de Wi-Fi
+no início, com PubSubClient 2.8, ArduinoJson 7.4.2 e LiquidCrystal I2C
+(versão desta última não registrada). Firmware atual, SHA-256 normalizado LF:
+<code>9519de2e242eac577670bf138a4dc4c70cb512824511c7c42d43c9e146804c8c</code>.</p>
+<p>Os <strong>33 arquivos de evidência</strong> estão em <a href="../evidencias/integracao">evidencias/integracao/</a>.
+O <a href="../evidencias/integracao/log.txt">diário cronológico</a> registra comandos de coleta.
+JSON/TXT preservam resultados e ACKs; fotos mostram o simulador em execução.
+As capturas mostram a montagem ampliada do Wokwi e telas da central.
+Compilação, ausência de aviso serial e buzzer constam do registro do ensaio;
+não há log integral de compilação, áudio ou vídeo contínuo entre as evidências.</p>
+<h4 id="sequencia-observada">Sequência observada</h4>
+<ol>
+<li><strong>Boot:</strong> FALHA → NORMAL após Wi-Fi/MQTT/heartbeat, verde,
+   LCD <code>NORMAL - / INICIO</code>, zero atuações.
+   <a href="../evidencias/integracao/01_wokwi_normal.jpg">Foto NORMAL</a> e
+   <a href="../evidencias/integracao/01_status_normal.json">status inicial</a>.</li>
+<li><strong>Preliminar:</strong> seq04 publicou TRASEIRA, confiança 0,727, M3.
+   Evento <code>fed9f35e-9e8d-428b-928d-26bcbd7ed0b5</code>, SUSPEITA automática aplicada
+   antes da decisão: amarelo, LCD <code>SUSPEITA fed9f / APLICADO</code>.
+   <a href="../evidencias/integracao/02_detector_seq04.json">Detector</a>,
+   <a href="../evidencias/integracao/02_status_suspeita.json">status</a>,
+   <a href="../evidencias/integracao/02_central_suspeita.png">central</a> e
+   <a href="../evidencias/integracao/02_wokwi_suspeita.jpg">Wokwi</a>.</li>
+<li><strong>Confirmação:</strong> OPERADOR-TESTE-01 confirmou; CONFIRMADO aplicado,
+   vermelho e buzzer relatado, LCD <code>CONFIRMADO fed9f / APLICADO</code>, atuações 2.
+   <a href="../evidencias/integracao/03_status_confirmado.json">Status</a>,
+   <a href="../evidencias/integracao/03_central_confirmado.png">central</a> e
+   <a href="../evidencias/integracao/03_wokwi_confirmado.jpg">Wokwi</a>.</li>
+<li><strong>Duplicata:</strong> mesmo command_id reenviado três vezes → três RECEBIDO e
+   três APLICADO; contador mantido em 2.
+   <a href="../evidencias/integracao/04_acks_duplicado.txt">ACKs</a>,
+   <a href="../evidencias/integracao/04_status_apos_duplicado.json">status posterior</a> e diário.</li>
+<li><strong>Encerramento:</strong> ENCERRAR → NORMAL, sem evento ativo, atuações 3.
+   Novo command_id tentando CONFIRMAR o encerrado → três RECUSADO;
+   continuou NORMAL e contador 3, conforme diário.
+   <a href="../evidencias/integracao/05_status_encerrado.json">Status</a> e
+   <a href="../evidencias/integracao/05_acks_reabrir.txt">ACKs</a>.</li>
+<li><strong>Rejeição:</strong> seq11 FRONTAL em SUSPEITA; REJEITAR → NORMAL,
+   atuações 5 e evento REJEITADO.
+   <a href="../evidencias/integracao/06_detector_seq11.json">Detector</a>,
+   <a href="../evidencias/integracao/06_status_rejeitado.json">status</a> e histórico final.</li>
+<li><strong>Negativo e dúvida:</strong> seq01 SEM ACIDENTE, zero eventos; seq03
+   INDETERMINADO, 0,284, REVISAO_HUMANA/M0, com SUSPEITA preliminar.
+   <a href="../evidencias/integracao/07_detector_seq01.json">seq01</a>,
+   <a href="../evidencias/integracao/07_detector_seq03.json">seq03</a> e histórico.</li>
+<li><strong>Heartbeat:</strong> central parada às 18:41:25; ESP32 FALHA, roxo,
+   LCD <code>FALHA 4b1ae / AP sem heartbeat</code>. Central religada às 18:41:55:
+   diário registra 3 eventos, 6 comandos e 3 decisões preservados,
+   com recuperação automática para SUSPEITA do evento ativo.
+   <a href="../evidencias/integracao/08_wokwi_falha_sem_heartbeat.jpg">Foto</a> e diário.</li>
+<li><strong>Indisponibilidade injetada:</strong> botão fecha TCP local sem MQTT DISCONNECT;
+   serial INJECAO_FALHA relatado; LCD <code>FALHA 4b1ae / AP sem MQTT</code>.
+   A central recebeu <code>origem: LWT</code> e exibiu FALHA/SEM CONTATO
+   (idades 24,2 e 29,6 s). Status 3–8 mostram SUSPEITA/EM CONTATO após reconexão.
+   <a href="../evidencias/integracao/09_wokwi_falha_sem_mqtt.jpg">Foto</a>,
+   <a href="../evidencias/integracao/09_central_sem_contato.png">central</a>,
+   <a href="../evidencias/integracao/09_status_1.json">LWT</a>,
+   <a href="../evidencias/integracao/09_status_2.json">segunda leitura</a>,
+   <a href="../evidencias/integracao/09_status_3.json">recuperação</a>.
+   O broker público não foi derrubado: a falha foi injetada no cliente ESP32.</li>
+<li><strong>Fechamento:</strong> INDETERMINADO revisado e REJEITADO → NORMAL, atuações 7.
+    Exportações: 3 eventos, 7 comandos, 4 decisões e 14 ACKs únicos.
+    <a href="../evidencias/integracao/10_historico.json">JSON</a>,
+    <a href="../evidencias/integracao/10_historico.csv">CSV</a>,
+    <a href="../evidencias/integracao/10_central_historico.png">central</a>,
+    <a href="../evidencias/integracao/10_status_final.json">status</a>.
+    ACKs repetidos e tentativa externa de reabertura estão nos TXT próprios;
+    não são novas aplicações nem novos comandos criados pela central.</li>
+</ol>
+<h4 id="relogios-e-latencias">Relógios e latências</h4>
+<p>A simulação rodou entre <strong>34% e 46%</strong> da velocidade real. <code>millis()</code> e relógio
+ESP32 acompanham essa simulação; heartbeat de 7 s e injeção de 15 s são tempos
+do simulador. O timeout de contato da central usa 7 s reais.
+Mesmo <code>clock_sync: true</code> não torna timestamps do ESP32 comparáveis aos do PC.
+Latências são diferenças entre fases ENVIADO, RECEBIDO e APLICADO registradas
+<strong>na central</strong>, calculadas do histórico final, sem usar uptime ou tempo do vídeo.</p>
+<p>SUSPEITA de seq04: ENVIADO 18:37:41.970 → RECEBIDO 18:37:43.402 → APLICADO
+18:37:43.407 (−03:00): 1,432 s até recebimento, 1,437 s até aplicação e
+0,005 s entre ACKs. Não medem o percurso completo desde o vídeo nem o instante
+elétrico. Fotos estáticas não provam frequência do pisca ou continuidade.</p>
+<p>Horários do diário indicam quando cada comando de coleta rodou. O botão foi
+pressionado aproximadamente 25 s antes da linha <code>BOTAO INJECAO</code>, conforme o registro de coleta. A idade inicial de 24,2 s não é latência contada dessa linha.
+Não há medição exata do tempo de reação ao botão.</p>
+<h4 id="erros-preservados-e-melhorias">Erros preservados e melhorias</h4>
+<ul>
+<li><strong>seq02, LATERAL → SEM ACIDENTE:</strong> falso negativo, zero candidatos temporais
+  no diagnóstico congelado. Causa provável: contato oblíquo perto da borda e
+  perda/fusão de contornos interrompem trajetórias antes dos portões temporais.
+  Proposta: manter hipóteses nas bordas e fusões, testar novas laterais independentes.</li>
+<li><strong>seq09, INDETERMINADO → SEM ACIDENTE:</strong> erro de abstenção, também sem candidato.
+  Falta de observação sob oclusão virou ausência de gatilho. Proposta: modelar
+  região oculta e perda de rastros após aproximação, pedir revisão humana e
+  medir falsos alarmes em negativos com oclusão. Nenhum escore foi emitido.</li>
+<li><strong>seq04, indicador incorreto:</strong> gabarito: quatro veículos em cena e dois
+  envolvidos; evento: <code>veiculos_envolvidos: 3</code>. O valor disparou
+  <strong>M3 / AMBULANCIA_SIMULADA</strong>. TRASEIRA correta não valida a recomendação.
+  Causa provável: inclusão de rastro próximo e imobilizado ou fragmentação/
+  associação de rastros; o agrupamento usa proximidade e redução de movimento,
+  sem provar participação causal. A identidade do rastro indevido não foi
+  reconstruída. Proposta: rotular envolvidos por ator; avaliar erro absoluto
+  da contagem, precisão/recall da participação, obstrução e regra recomendada
+  contra gabarito. O avaliador atual mede tipo/abstenção e não detecta este erro.</li>
+</ul>
+<p>Detector e final <strong>4/6</strong> preservados; são hipóteses explicativas e propostas,
+sem correção implementada ou validada.</p>
+<h4 id="cobertura-e-limites">Cobertura e limites</h4>
+<p>Decisões, duplicata, encerramento, heartbeat e LWT têm evidências do simulador
+com transporte MQTT_REAL. Fila FIFO simultânea, reinício preservando NVS,
+expulsão do anel após 64 comandos, falha de gravação e perda de energia
+<strong>não foram exercitados nesta coleta Wokwi</strong>; testes Python e inspeção estática
+mantêm sua cobertura limitada. Sem hardware físico ou tráfego real.</p>
+<p>As ferramentas <a href="../../tools/operador.py">operador.py</a> e
+<a href="../../tools/reenviar_comando.py">reenviar_comando.py</a> permitem reproduzir
+as decisões e os ensaios de duplicata. Instruções detalhadas no README. Endereço salvo: <a href="../LINKS.md#wokwi">cadastro de links</a>.</p>
+<h3 id="horarios-das-fases-na-central-0300">Horários das fases na central (−03:00)</h3>
+<table><thead><tr><th>Comando</th><th>Evento</th><th>ENVIADO</th><th>RECEBIDO</th><th>APLICADO</th><th>Δ enviado→aplicado (s)</th></tr></thead><tbody><tr><td>SUSPEITA</td><td>fed9f</td><td>18:37:41.970</td><td>18:37:43.402</td><td>18:37:43.407</td><td>1.437</td></tr><tr><td>CONFIRMADO</td><td>fed9f</td><td>18:38:40.203</td><td>18:38:41.693</td><td>18:38:41.698</td><td>1.495</td></tr><tr><td>NORMAL</td><td>fed9f</td><td>18:39:44.437</td><td>18:39:45.863</td><td>18:39:45.868</td><td>1.431</td></tr><tr><td>SUSPEITA</td><td>5b18b</td><td>18:40:24.567</td><td>18:40:26.088</td><td>18:40:26.372</td><td>1.805</td></tr><tr><td>NORMAL</td><td>5b18b</td><td>18:40:32.602</td><td>18:40:34.095</td><td>18:40:34.100</td><td>1.498</td></tr><tr><td>SUSPEITA</td><td>4b1ae</td><td>18:40:56.704</td><td>18:40:58.170</td><td>18:40:58.413</td><td>1.709</td></tr><tr><td>NORMAL</td><td>4b1ae</td><td>18:43:52.585</td><td>18:43:54.032</td><td>18:43:54.307</td><td>1.722</td></tr></tbody></table>
+
+<p>Valores calculados do histórico JSON recebido. IDs completos permanecem no arquivo
+original. O intervalo termina no registro do ACK APLICADO na central.</p>
+<h3 id="figuras-da-integracao">Figuras da integração</h3>
+<p>As imagens abaixo registram o ensaio; clique para abrir o original preservado.
+Os JSON/TXT e o diário vinculados na seção anterior completam a evidência.
+O <a href="../evidencias/integracao/10_central_historico.png">histórico completo da central</a>
+permanece disponível na captura original e nas exportações JSON/CSV.</p>
+<div class="device-grid"><figure class="integration device"><a href="../evidencias/integracao/01_wokwi_normal.jpg"><img src="recortes/01_wokwi_normal.png" alt="Boot concluído: NORMAL verde; LCD sem evento ativo."></a><figcaption>Figura I1. Boot concluído: NORMAL verde; LCD sem evento ativo. Captura: simulador Wokwi, 16/10/2026. <a href="../evidencias/integracao/01_wokwi_normal.jpg">Original</a>.</figcaption></figure><figure class="integration device"><a href="../evidencias/integracao/02_wokwi_suspeita.jpg"><img src="recortes/02_wokwi_suspeita.png" alt="SUSPEITA amarela aplicada antes da confirmação humana."></a><figcaption>Figura I2. SUSPEITA amarela aplicada antes da confirmação humana. Captura: simulador Wokwi, 16/10/2026. <a href="../evidencias/integracao/02_wokwi_suspeita.jpg">Original</a>.</figcaption></figure><figure class="integration device"><a href="../evidencias/integracao/03_wokwi_confirmado.jpg"><img src="recortes/03_wokwi_confirmado.png" alt="CONFIRMADO vermelho; sinal sonoro registrado no ensaio."></a><figcaption>Figura I3. CONFIRMADO vermelho; sinal sonoro registrado no ensaio. Captura: simulador Wokwi, 16/10/2026. <a href="../evidencias/integracao/03_wokwi_confirmado.jpg">Original</a>.</figcaption></figure><figure class="integration device"><a href="../evidencias/integracao/08_wokwi_falha_sem_heartbeat.jpg"><img src="recortes/08_wokwi_falha_sem_heartbeat.png" alt="FALHA roxa por ausência de heartbeat; evento ativo preservado."></a><figcaption>Figura I4. FALHA roxa por ausência de heartbeat; evento ativo preservado. Captura: simulador Wokwi, 16/10/2026. <a href="../evidencias/integracao/08_wokwi_falha_sem_heartbeat.jpg">Original</a>.</figcaption></figure><figure class="integration device"><a href="../evidencias/integracao/09_wokwi_falha_sem_mqtt.jpg"><img src="recortes/09_wokwi_falha_sem_mqtt.png" alt="FALHA por ausência de MQTT durante injeção local."></a><figcaption>Figura I5. FALHA por ausência de MQTT durante injeção local. Captura: simulador Wokwi, 16/10/2026. <a href="../evidencias/integracao/09_wokwi_falha_sem_mqtt.jpg">Original</a>.</figcaption></figure></div>
+<figure class="integration central"><a href="../evidencias/integracao/02_central_suspeita.png"><img src="../evidencias/integracao/02_central_suspeita.png" alt="Central real: ocorrência e fases da sinalização preliminar."></a><figcaption>Figura I6. Central real: ocorrência e fases da sinalização preliminar. Captura: central operacional, 16/10/2026. <a href="../evidencias/integracao/02_central_suspeita.png">Original</a>.</figcaption></figure>
+<figure class="integration central"><a href="../evidencias/integracao/03_central_confirmado.png"><img src="../evidencias/integracao/03_central_confirmado.png" alt="Central real após confirmação por OPERADOR-TESTE-01."></a><figcaption>Figura I7. Central real após confirmação por OPERADOR-TESTE-01. Captura: central operacional, 16/10/2026. <a href="../evidencias/integracao/03_central_confirmado.png">Original</a>.</figcaption></figure>
+<figure class="integration central"><a href="../evidencias/integracao/09_central_sem_contato.png"><img src="../evidencias/integracao/09_central_sem_contato.png" alt="Central real: FALHA/SEM CONTATO durante a desconexão injetada."></a><figcaption>Figura I8. Central real: FALHA/SEM CONTATO durante a desconexão injetada. Captura: central operacional, 16/10/2026. <a href="../evidencias/integracao/09_central_sem_contato.png">Original</a>.</figcaption></figure>
+
+<h2 id="7-resultados-reais-dev-separado-do-final">7. Resultados reais: dev separado do final</h2>
+<p>Congelamento: 2026-10-16T17:59:37.711-03:00. Detector SHA-256: <code>1f6e0911180b4c5aa1dcbc37757f8c81bfb374db4ac0b8b32c8e23148bc984de</code>.
+Hashes de fontes, manifesto e vídeos ficam em calibration.json. O relatório recusa
+fontes diferentes do congelamento. O diagnóstico dos erros só lê imagens com o detector
+inalterado; não é uma nova calibração. Pesos e limiar foram escolhidos antes do final.</p>
+<table><thead><tr><th>Conjunto</th><th>Acertos</th><th>FP</th><th>FN</th><th>Erro de tipo</th><th>INDETERMINADO</th></tr></thead><tbody><tr><td>dev</td><td>6/6</td><td>0</td><td>0</td><td>0</td><td>1</td></tr><tr><td>final</td><td>4/6</td><td>0</td><td>1</td><td>0</td><td>0</td></tr></tbody></table>
+
+<table><thead><tr><th>Vídeo / conjunto</th><th>Esperado</th><th>Obtido</th><th>Score</th><th>Regra</th><th>Acertou</th><th>Eventos</th></tr></thead><tbody><tr><td>seq01.mp4 / dev</td><td>SEM ACIDENTE</td><td>SEM ACIDENTE</td><td>N/A</td><td>SEM_EVENTO</td><td>True</td><td>0</td></tr><tr><td>seq02.mp4 / final</td><td>LATERAL</td><td>SEM ACIDENTE</td><td>N/A</td><td>SEM_EVENTO</td><td>False</td><td>0</td></tr><tr><td>seq03.mp4 / dev</td><td>INDETERMINADO</td><td>INDETERMINADO</td><td>0.284</td><td>M0</td><td>True</td><td>1</td></tr><tr><td>seq04.mp4 / dev</td><td>TRASEIRA</td><td>TRASEIRA</td><td>0.727</td><td>M3</td><td>True</td><td>1</td></tr><tr><td>seq05.mp4 / final</td><td>SEM ACIDENTE</td><td>SEM ACIDENTE</td><td>N/A</td><td>SEM_EVENTO</td><td>True</td><td>0</td></tr><tr><td>seq06.mp4 / final</td><td>FRONTAL</td><td>FRONTAL</td><td>0.757</td><td>M1</td><td>True</td><td>1</td></tr><tr><td>seq07.mp4 / dev</td><td>SEM ACIDENTE</td><td>SEM ACIDENTE</td><td>N/A</td><td>SEM_EVENTO</td><td>True</td><td>0</td></tr><tr><td>seq08.mp4 / dev</td><td>LATERAL</td><td>LATERAL</td><td>0.612</td><td>M2</td><td>True</td><td>1</td></tr><tr><td>seq09.mp4 / final</td><td>INDETERMINADO</td><td>SEM ACIDENTE</td><td>N/A</td><td>SEM_EVENTO</td><td>False</td><td>0</td></tr><tr><td>seq10.mp4 / final</td><td>TRASEIRA</td><td>TRASEIRA</td><td>0.719</td><td>M4</td><td>True</td><td>1</td></tr><tr><td>seq11.mp4 / dev</td><td>FRONTAL</td><td>FRONTAL</td><td>0.832</td><td>M1</td><td>True</td><td>1</td></tr><tr><td>seq12.mp4 / final</td><td>SEM ACIDENTE</td><td>SEM ACIDENTE</td><td>N/A</td><td>SEM_EVENTO</td><td>True</td><td>0</td></tr></tbody></table>
+
+<p>FP: categoria de acidente prevista em não acidente/ambíguo. FN: acidente esperado sem
+categoria de acidente prevista. Erro de tipo conta separadamente. Erro de abstenção
+é ambíguo esperado com outra saída; o de seq09 aparece no acerto geral, não em FN.
+N/A indica ausência de evento e portanto de escore; não é índice zero inventado.</p>
+<p>Termos completos A/C/D/I/M, qualidade local Q, indicadores e motivo estão nos
+payloads de <code>data/results/dev.json</code> e <code>final.json</code>. A seção de algoritmo define
+suas unidades; os quadros anotados estão no Anexo A.</p>
+<h3 id="oito-verificacoes-obrigatorias">Oito verificações obrigatórias</h3>
+<table><thead><tr><th>Teste obrigatório</th><th>Esperado</th><th>Obtido</th><th>Evidência</th><th>Passou</th></tr></thead><tbody><tr><td>1. Três categorias</td><td>Reconhecer seis acidentes, dois de cada tipo.</td><td>5/6; dev 3/3, final 2/3; seq02 LATERAL → SEM ACIDENTE.</td><td>data/results/dev.json; final.json; tests/test_vision.py::test_dev_temporal_accidents</td><td>PARCIAL</td></tr><tr><td>2. Tráfego sem acidente</td><td>Quatro negativos sem ocorrência.</td><td>4/4; 0 eventos nos negativos.</td><td>data/results/dev.json; final.json; 07_detector_seq01.json</td><td>SIM</td></tr><tr><td>3. Visibilidade prejudicada</td><td>Explicitar INDETERMINADO e revisão humana.</td><td>1/2; seq03 0,284/M0; seq09 → SEM ACIDENTE.</td><td>07_detector_seq03.json; data/results/final.json</td><td>PARCIAL</td></tr><tr><td>4. Ocorrência persistente</td><td>Um event_id por episódio nas sequências.</td><td>6 sequências com evento; contagens: [1, 1, 1, 1, 1, 1].</td><td>data/results/dev.json; final.json; tests/test_vision.py::test_spatiotemporal_deduplication</td><td>SIM</td></tr><tr><td>5. Decisões humanas</td><td>Confirmar/rejeitar, identificar operador e aplicar.</td><td>4 decisões; 7 comandos APLICADO; rejeição → NORMAL (5 atuações).</td><td>03_status_confirmado.json; 06_status_rejeitado.json; 10_historico.json</td><td>SIM</td></tr><tr><td>6. Comunicação indisponível</td><td>FALHA e recuperação automática.</td><td>LWT/SEM CONTATO; idade 24.2 s; depois SUSPEITA/EM CONTATO. Heartbeat: foto + diário.</td><td>08_wokwi_falha_sem_heartbeat.jpg; 09_status_1.json; 09_status_3.json; log.txt</td><td>SIM (injeção)</td></tr><tr><td>7. Comando duplicado</td><td>ACK repetido sem repetir atuação; encerrado não reabre.</td><td>3 RECEBIDO + 3 APLICADO; atuações 2 → 2; reabertura: 3 RECUSADO, NORMAL.</td><td>04_acks_duplicado.txt; 04_status_apos_duplicado.json; 05_acks_reabrir.txt; log.txt</td><td>SIM</td></tr><tr><td>8. Integração completa</td><td>Vídeo → MQTT → central → ESP32 → ACK.</td><td>seq04 TRASEIRA → SUSPEITA → CONFIRMADO; 3 eventos, 7 comandos e 14 ACKs no fechamento.</td><td>02_detector_seq04.json; 02_status_suspeita.json; 03_status_confirmado.json; 10_historico.json</td><td>SIM</td></tr></tbody></table>
+
+<h3 id="suite-automatizada">Suíte automatizada</h3>
+<p>64 testes passaram; código de saída = 0.
+O registro completo de cada teste está em <code>data/results/pytest.json</code>, e a saída
+literal em <code>data/results/pytest.txt</code>. A suíte usa transporte em memória,
+modelo do dispositivo e cliente de teste Flask; não substitui o ensaio Wokwi.
+A <a href="../RASTREABILIDADE.md">matriz de rastreabilidade</a> relaciona requisitos,
+implementações, testes e evidências sem repetir aqui a listagem completa.</p>
+<h2 id="8-analise-de-erros-limitacoes-e-melhorias">8. Análise de erros, limitações e melhorias</h2>
+<p>A avaliação final foi 4/6; não se corrigiu o detector para os dois erros.
+O caso lateral de seq02 é um falso negativo. Em seq09, oclusão parcial impediu
+expressar a incerteza esperada. O diagnóstico final-diagnostics.json registrou
+zero candidatos nas duas cenas e queda de visibilidade de rastros. Não se deve
+atribuir ausência de evento a um escore que não chegou a existir. O reconhecimento sob oclusão permanece parcial.
+Uma hipótese a investigar num novo ciclo é que contato oblíquo no limite da imagem
+e contornos encobertos falham antes dos portões temporais. Não foi validada correção.</p>
+<p>As quatro situações negativas não geraram ocorrência; isso não estima segurança
+em tráfego real. Dev pequeno, física simplificada, fundo uniforme e conhecimento
+da câmera limitam validade externa. Sem probabilidade calibrada, sem diagnóstico,
+sem dados de vítimas, sem serviço de emergência acionado. Deduplicação de episódio
+é local à sessão, e a visão não tem outbox persistente de eventos. URLs de imagens
+requerem arquivos locais no computador da central. O broker público permite forjar
+mensagens; validação de IDs não autentica origem.</p>
+<p>Melhorias para outro conjunto: teste real autorizado e independente; calibração em
+perspectiva; compensação de câmera e iluminação; rastreamento durante oclusão longa;
+abstenção por perda localizada de trajetória; identidade durável de episódio; outbox
+de eventos; broker privado TLS/autenticação/ACL; testes de energia e NVS e medição
+fim a fim com Wokwi. Não são capacidades já verificadas.</p>
+<p><strong>Erro adicional de indicador:</strong> seq04 tem quatro veículos em cena, dois envolvidos;
+o evento contou três e acionou M3 (ambulância simulada). O acerto do tipo TRASEIRA
+não comprova o indicador nem a recomendação. O agrupamento por proximidade e
+movimento pode incluir rastro indevido; a causa exata não foi isolada. Avaliar
+contagens, participação por ator, obstrução e regra contra gabarito é melhoria
+proposta, sem alterar o detector nesta entrega. Ver análise detalhada na integração.</p>
+<p><strong>Limitações dos ensaios:</strong> ausência de log integral de compilação,
+versão exata de LiquidCrystal I2C, áudio e frequência física dos atuadores,
+reinício/NVS/energia e FIFO simultânea no Wokwi não foram testados.
+A coleta documenta o firmware atual no simulador; não demonstra hardware físico.</p>
+<h2 id="9-reproducao-referencias-e-links">9. Reprodução, referências e links</h2>
+<p>As instruções completas estão no README. Na raiz, com .venv existente:</p>
+<pre><code class="language-powershell">.venv/Scripts/python -m pytest -q -p no:cacheprovider --tb=short
+.venv/Scripts/python -m tools.build_report
+.venv/Scripts/python -m tools.demo
+</code></pre>
+<p>A execução dev/final conserva os tipos, escores e regras da avaliação congelada.
+A correção de acentuação no comentário de parâmetros não altera o algoritmo;
+<code>data/results/equivalencia.json</code> registra a comparação e os hashes.</p>
+<p>Python 3.14.2; OpenCV 5.0.0; NumPy 2.5.4; paho-mqtt 2.1.0; Flask 3.1.3;
+pytest 9.1.1. Requirements fixados; Markdown é usado somente neste construtor.
+No Wokwi: PubSubClient 2.8, ArduinoJson 7.4.2 e LiquidCrystal I2C (instalação/versão
+exata desta última não registrada na coleta). Abrir HTML no Edge e imprimir A4 com fundos,
+sem cabeçalhos/rodapés; inspecionar todas as páginas após exportar.</p>
+<p>Referências de implementação (links não consultados na execução offline):</p>
+<ul>
+<li>Enunciado CP3-MORGS.pdf, FIAP/Edge Computing: enunciado da atividade de 16/10/2026.</li>
+<li><a href="https://docs.opencv.org/">OpenCV</a>: processamento de imagem, contornos e vídeo.</li>
+<li><a href="https://eclipse.dev/paho/files/paho.mqtt.python/html/">Eclipse Paho</a>: transporte MQTT Python.</li>
+<li><a href="https://flask.palletsprojects.com/">Flask</a>, <a href="https://docs.python.org/3/library/sqlite3.html">SQLite/Python</a>, <a href="https://docs.pytest.org/">pytest</a>.</li>
+<li><a href="https://pubsubclient.knolleary.net/api">PubSubClient</a>, <a href="https://arduinojson.org/v7/">ArduinoJson v7</a>, <a href="https://docs.wokwi.com/">Wokwi</a>.</li>
+<li><a href="https://github.com/RogerioOxy/MotivaVision-CP3">Repositório</a>, endereço fornecido; disponibilidade não consultada sem rede.</li>
+<li><a href="../LINKS.md#wokwi">Cadastro Wokwi</a>; <a href="../WOKWI.md">recriação da montagem</a>.</li>
+</ul>
+<h2 id="anexo-a-quadros-anotados-gerados-da-execucao">Anexo A. Quadros anotados gerados da execução</h2>
+<h3 id="registros-de-execucao-e-rastreabilidade">Registros de execução e rastreabilidade</h3>
+<p>Os arquivos <a href="../../data/results/pytest.txt">pytest.txt</a>,
+<a href="../../data/results/dev-stdout.txt">dev-stdout.txt</a> e
+<a href="../../data/results/final-stdout.txt">final-stdout.txt</a> preservam as saídas completas.
+A <a href="../RASTREABILIDADE.md">matriz de rastreabilidade</a> contém a relação detalhada
+entre requisitos, implementação, testes e evidências.</p>
+<div class="evidence-grid">
+<figure><img src='../../data/evidence/b44016a4-40bd-4ccd-b843-947c97df3375.jpg'><figcaption>seq03.mp4 — INDETERMINADO — 4.6 s</figcaption></figure><figure><img src='../../data/evidence/f1628558-c952-4955-b41e-4af2e0582846.jpg'><figcaption>seq04.mp4 — TRASEIRA — 3.15 s</figcaption></figure><figure><img src='../../data/evidence/85b1131d-9bfb-4294-867e-118eb4d7aebb.jpg'><figcaption>seq08.mp4 — LATERAL — 4.1 s</figcaption></figure><figure><img src='../../data/evidence/749c36ea-cbbd-4583-8142-977810acce0f.jpg'><figcaption>seq11.mp4 — FRONTAL — 5.4 s</figcaption></figure><figure><img src='../../data/evidence/e2e1df31-7e5d-4eee-b8da-6f2e2204f781.jpg'><figcaption>seq06.mp4 — FRONTAL — 3.95 s</figcaption></figure><figure><img src='../../data/evidence/f7ebfd44-ce7a-40fa-82aa-185ae04682f3.jpg'><figcaption>seq10.mp4 — TRASEIRA — 4.65 s</figcaption></figure>
+</div></body></html>

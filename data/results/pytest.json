@@ -1,0 +1,407 @@
+{
+  "exitstatus": 0,
+  "tests": [
+    {
+      "test": "tests/test_central.py::test_recommendation_matrix[TRASEIRA-nao-EQUIPE_OPERACIONAL]",
+      "outcome": "passed",
+      "duration_s": 0.00014,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_recommendation_matrix[FRONTAL-sim-AVALIACAO_PRIORITARIA_RESGATE_SIMULADO]",
+      "outcome": "passed",
+      "duration_s": 0.00013,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_recommendation_matrix[LATERAL-sim-AMBULANCIA_SIMULADA]",
+      "outcome": "passed",
+      "duration_s": 0.00012,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_recommendation_matrix[INDETERMINADO-desconhecido-REVISAO_HUMANA]",
+      "outcome": "passed",
+      "duration_s": 0.00012,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_low_confidence_and_unknown_count",
+      "outcome": "passed",
+      "duration_s": 0.00012,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_event_command_ack_schema",
+      "outcome": "passed",
+      "duration_s": 0.00023,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_event_dedup_and_central_recalculates_recommendation",
+      "outcome": "passed",
+      "duration_s": 0.03388,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_confirmation_rejection_and_audit",
+      "outcome": "passed",
+      "duration_s": 0.05757,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_duplicate_command_and_closed_event_do_not_actuate",
+      "outcome": "passed",
+      "duration_s": 0.06793,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_timeout_broker_failure_and_recovery_model",
+      "outcome": "passed",
+      "duration_s": 0.0256,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_sent_is_not_applied_and_outbox_survives_restart",
+      "outcome": "passed",
+      "duration_s": 0.04033,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_only_one_active_and_wait_for_close_ack",
+      "outcome": "passed",
+      "duration_s": 0.07122,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_persistence_exports_and_web_operator",
+      "outcome": "passed",
+      "duration_s": 0.0699,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_retained_status_is_not_live_contact",
+      "outcome": "passed",
+      "duration_s": 0.05721,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_invalid_mqtt_json_is_reported",
+      "outcome": "passed",
+      "duration_s": 0.01981,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_receive_during_failure_waits_for_heartbeat",
+      "outcome": "passed",
+      "duration_s": 0.05048,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_full_offline_video_mqtt_central_device_ack",
+      "outcome": "passed",
+      "duration_s": 0.60945,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_command_ring_continues_after_64_and_preserves_closed",
+      "outcome": "passed",
+      "duration_s": 0.13181,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_phase_timestamps_status_json_and_screen",
+      "outcome": "passed",
+      "duration_s": 0.07006,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_rules_combine_type_and_variable_indicator",
+      "outcome": "passed",
+      "duration_s": 0.00014,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_central.py::test_firmware_artifacts_contract",
+      "outcome": "passed",
+      "duration_s": 0.00088,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_documentation.py::test_documentation_evidence_matches_supplied_artifacts",
+      "outcome": "passed",
+      "duration_s": 0.00476,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_documentation.py::test_report_links_images_and_single_link_registry",
+      "outcome": "passed",
+      "duration_s": 0.01637,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_arrival_suspicion_rejection_closes_and_never_reopens",
+      "outcome": "passed",
+      "duration_s": 0.05463,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_fifo_persists_and_only_advances_after_close_applied",
+      "outcome": "passed",
+      "duration_s": 0.08565,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_queued_rejection_gets_tombstone_before_next_suspicion",
+      "outcome": "passed",
+      "duration_s": 0.08356,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_fast_decisions_cannot_overtake_unacknowledged_preliminary",
+      "outcome": "passed",
+      "duration_s": 0.06696,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_refusal_blocks_outbox_for_inspection",
+      "outcome": "passed",
+      "duration_s": 0.03279,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_migrate_legacy_history_without_losing_audit",
+      "outcome": "passed",
+      "duration_s": 0.03643,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_legacy_two_commands_two_decisions_migration[APLICADO]",
+      "outcome": "passed",
+      "duration_s": 0.03611,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_legacy_two_commands_two_decisions_migration[ENVIADO]",
+      "outcome": "passed",
+      "duration_s": 0.043,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_old_applied_ack_cannot_replace_new_device_state",
+      "outcome": "passed",
+      "duration_s": 0.05213,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_contact_timeout_calculation_http_and_page[0-False]",
+      "outcome": "passed",
+      "duration_s": 0.03753,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_contact_timeout_calculation_http_and_page[7-False]",
+      "outcome": "passed",
+      "duration_s": 0.03543,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_contact_timeout_calculation_http_and_page[7.001-True]",
+      "outcome": "passed",
+      "duration_s": 0.03692,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_contact_timeout_calculation_http_and_page[39-True]",
+      "outcome": "passed",
+      "duration_s": 0.03797,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_lwt_is_offline_without_pretending_live_contact",
+      "outcome": "passed",
+      "duration_s": 0.02035,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_firmware_display_network_source_contract",
+      "outcome": "passed",
+      "duration_s": 0.00041,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_circuit_uses_diagram_positions_and_keeps_parts_separate",
+      "outcome": "passed",
+      "duration_s": 0.00068,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_integration.py::test_frozen_results_and_report_contract",
+      "outcome": "passed",
+      "duration_s": 0.00554,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_line_endings.py::test_windows_checkout_uses_lf_and_preserves_binary_assets",
+      "outcome": "passed",
+      "duration_s": 0.28854,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_line_endings.py::test_fingerprint_ignores_only_text_crlf_and_detects_real_changes",
+      "outcome": "passed",
+      "duration_s": 0.00733,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_line_endings.py::test_dev_final_equivalence_after_hash_migration",
+      "outcome": "passed",
+      "duration_s": 6.65082,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_tools.py::test_operator_records_identified_decision_through_form",
+      "outcome": "passed",
+      "duration_s": 0.07603,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_tools.py::test_replay_preserves_payload_and_filters_ack_ids",
+      "outcome": "passed",
+      "duration_s": 0.00035,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_tools.py::test_replay_refuses_invalid_command_before_connect",
+      "outcome": "passed",
+      "duration_s": 0.00016,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_tracker_velocity_and_identity",
+      "outcome": "passed",
+      "duration_s": 0.00918,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_overlapping_stationary_boxes_are_not_collision",
+      "outcome": "passed",
+      "duration_s": 0.12804,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_relative_directions[a0-b0-TRASEIRA]",
+      "outcome": "passed",
+      "duration_s": 0.00018,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_relative_directions[a1-b1-FRONTAL]",
+      "outcome": "passed",
+      "duration_s": 0.00014,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_relative_directions[a2-b2-LATERAL]",
+      "outcome": "passed",
+      "duration_s": 0.00014,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_spatiotemporal_deduplication",
+      "outcome": "passed",
+      "duration_s": 0.00039,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_dev_temporal_accidents[seq04.mp4-TRASEIRA]",
+      "outcome": "passed",
+      "duration_s": 0.43562,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_dev_temporal_accidents[seq08.mp4-LATERAL]",
+      "outcome": "passed",
+      "duration_s": 0.40746,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_dev_temporal_accidents[seq11.mp4-FRONTAL]",
+      "outcome": "passed",
+      "duration_s": 0.57644,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_dev_no_accident[seq01.mp4]",
+      "outcome": "passed",
+      "duration_s": 0.57524,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_dev_no_accident[seq07.mp4]",
+      "outcome": "passed",
+      "duration_s": 0.64338,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_low_visibility_explicit_uncertainty",
+      "outcome": "passed",
+      "duration_s": 0.49019,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_confidence_threshold_causes_indeterminate",
+      "outcome": "passed",
+      "duration_s": 0.47491,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_detector_has_no_label_or_generator_dependency",
+      "outcome": "passed",
+      "duration_s": 0.01135,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_video_name_does_not_choose_category",
+      "outcome": "passed",
+      "duration_s": 0.51768,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_same_color_and_grayscale_tracks_keep_ids",
+      "outcome": "passed",
+      "duration_s": 0.04206,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_merged_blob_reuses_two_predicted_ids",
+      "outcome": "passed",
+      "duration_s": 0.02304,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_confidence_changes_with_each_evidence_term",
+      "outcome": "passed",
+      "duration_s": 0.00043,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_dedup_uses_shared_parameters",
+      "outcome": "passed",
+      "duration_s": 0.00018,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_lane_geometry_and_involved_count_are_observed",
+      "outcome": "passed",
+      "duration_s": 0.00028,
+      "evidence": "Asserções executadas pelo pytest"
+    },
+    {
+      "test": "tests/test_vision.py::test_manifest_has_distinct_geometry_and_held_out_parameters",
+      "outcome": "passed",
+      "duration_s": 0.00049,
+      "evidence": "Asserções executadas pelo pytest"
+    }
+  ]
+}

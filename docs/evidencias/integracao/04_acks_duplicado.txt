@@ -1,0 +1,6 @@
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"4e4a4d95-c6e9-49bb-bb61-60d79f3a9f8a","fase":"RECEBIDO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:07+00:00","clock_sync":true}
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"4e4a4d95-c6e9-49bb-bb61-60d79f3a9f8a","fase":"APLICADO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:07+00:00","clock_sync":true}
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"4e4a4d95-c6e9-49bb-bb61-60d79f3a9f8a","fase":"RECEBIDO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:08+00:00","clock_sync":true}
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"4e4a4d95-c6e9-49bb-bb61-60d79f3a9f8a","fase":"APLICADO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:08+00:00","clock_sync":true}
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"4e4a4d95-c6e9-49bb-bb61-60d79f3a9f8a","fase":"RECEBIDO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:08+00:00","clock_sync":true}
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"4e4a4d95-c6e9-49bb-bb61-60d79f3a9f8a","fase":"APLICADO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:08+00:00","clock_sync":true}

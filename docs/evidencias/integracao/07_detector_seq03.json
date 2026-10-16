@@ -1,0 +1,49 @@
+{
+  "resultado": "INDETERMINADO",
+  "events": [
+    {
+      "event_id": "4b1ae39f-67db-485a-a8fa-d3168a2ac2f5",
+      "timestamp": "2026-10-16T18:40:53.775-03:00",
+      "camera_id": "CAM-SIM-01",
+      "local": "Rodovia fictícia MV, km 42",
+      "tipo": "INDETERMINADO",
+      "confianca": {
+        "indice": 0.284,
+        "nivel": "INSUFICIENTE",
+        "definicao": "Índice heurístico temporal/local; não é probabilidade.",
+        "termos": {
+          "approach": 0.6872969972294588,
+          "contact": 1.0,
+          "deceleration": 0.9871280182501225,
+          "immobility": 1.0,
+          "category_margin": 0.3580938582300811
+        },
+        "qualidade_local": 0.075
+      },
+      "indicadores": {
+        "veiculos_envolvidos": 2,
+        "faixa_possivelmente_obstruida": "sim",
+        "faixas_obstruidas": [
+          1,
+          2
+        ],
+        "veiculo_imobilizado": true,
+        "tempo_parado_s": 0.75
+      },
+      "estado": "SUSPEITA",
+      "evidencia": {
+        "quadro": "data/evidence/4b1ae39f-67db-485a-a8fa-d3168a2ac2f5.jpg",
+        "tempo_video_s": 4.6,
+        "frame": 92,
+        "observacao": "Aproximação=49.8 px/s; contato observado=1.20 s; proximidade=1.50 s; razão pós/pré=0.013; visibilidade=0.73; Q local=0.08. Evidência temporal/local insuficiente: contato parcial ou degradado; revisão humana."
+      },
+      "recomendacao": {
+        "regra": "M0",
+        "recurso": "REVISAO_HUMANA",
+        "justificativa": "Evidência insuficiente; revisar sem concluir tipo ou gravidade."
+      }
+    }
+  ],
+  "frames": 148,
+  "duration_s": 7.4
+}

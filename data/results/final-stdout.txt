@@ -1,0 +1,7 @@
+final seq02.mp4 esperado=LATERAL       obtido=SEM ACIDENTE  eventos=0 score=N/A regra=SEM_EVENTO ERROU
+final seq05.mp4 esperado=SEM ACIDENTE  obtido=SEM ACIDENTE  eventos=0 score=N/A regra=SEM_EVENTO ACERTOU
+final seq06.mp4 esperado=FRONTAL       obtido=FRONTAL       eventos=1 score=0.757 regra=M1 ACERTOU
+final seq09.mp4 esperado=INDETERMINADO obtido=SEM ACIDENTE  eventos=0 score=N/A regra=SEM_EVENTO ERROU
+final seq10.mp4 esperado=TRASEIRA      obtido=TRASEIRA      eventos=1 score=0.719 regra=M4 ACERTOU
+final seq12.mp4 esperado=SEM ACIDENTE  obtido=SEM ACIDENTE  eventos=0 score=N/A regra=SEM_EVENTO ACERTOU
+RESUMO final: 4/6 corretos; FP=0; FN=1; erros_tipo=0; INDETERMINADO=0

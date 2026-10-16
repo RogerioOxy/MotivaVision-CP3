@@ -1,0 +1,6 @@
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"orq-reabrir-0002","fase":"RECEBIDO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:25+00:00","clock_sync":true}
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"orq-reabrir-0002","fase":"RECUSADO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:25+00:00","clock_sync":true}
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"orq-reabrir-0002","fase":"RECEBIDO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:25+00:00","clock_sync":true}
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"orq-reabrir-0002","fase":"RECUSADO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:25+00:00","clock_sync":true}
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"orq-reabrir-0002","fase":"RECEBIDO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:26+00:00","clock_sync":true}
+ACK {"event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","command_id":"orq-reabrir-0002","fase":"RECUSADO","estado":"CONFIRMADO","timestamp":"2026-10-16T21:38:26+00:00","clock_sync":true}

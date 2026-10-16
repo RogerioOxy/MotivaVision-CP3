@@ -1,0 +1,39 @@
+2026-10-16T18:37:39-03:00 publicar seq04
+fed9f35e-9e8d-428b-928d-26bcbd7ed0b5 TRASEIRA SUSPEITA
+cmd {'estado': 'SUSPEITA', 'event_id': 'fed9f35e-9e8d-428b-928d-26bcbd7ed0b5', 'id': 'b2e24db1-7703-4db5-8d06-8f774e557ecf', 'payload': '{"command_id": "b2e24db1-7703-4db5-8d06-8f774e557ecf", "event_id": "fed9f35e-9e8d-428b-928d-26bcbd7ed0b5", "timestamp": "2026-10-16T18:37:41.465-03:00", "estado": 
+2026-10-16T18:38:38-03:00 CONFIRMAR fed9f35e-9e8d-428b-928d-26bcbd7ed0b5
+Decisão registrada. <a href='/'>Voltar à central</a>
+2026-10-16T18:39:02-03:00 DUPLICADO 3x: {"command_id": "4e4a4d95-c6e9-49bb-bb61-60d79f3a9f8a", "event_id": "fed9f35e-9e8d-428b-928d-26bcbd7ed0b5", "timestamp": "2026-10-16T18:38:38.798-03:00", "estado": "CONFIRMADO"}
+antes CONFIRMADO atuacoes 2
+depois CONFIRMADO atuacoes 2
+2026-10-16T18:39:43-03:00 ENCERRAR fed9f35e-9e8d-428b-928d-26bcbd7ed0b5
+Decisão registrada. <a href='/'>Voltar à central</a>
+encerrado: NORMAL atuacoes 3 evento ''
+2026-10-16T18:39:53-03:00 REABRIR (command_id novo): {"command_id":"orq-reabrir-0002","event_id":"fed9f35e-9e8d-428b-928d-26bcbd7ed0b5","timestamp":"2026-10-16T18:45:00.000-03:00","estado":"CONFIRMADO"}
+apos reabrir: NORMAL atuacoes 3
+2026-10-16T18:40:20-03:00 publicar seq11
+antes de rejeitar: SUSPEITA
+2026-10-16T18:40:31-03:00 REJEITAR 5b18bd76-df2d-4efb-9e0c-b0706d540fc9
+Decisão registrada. <a href='/'>Voltar à central</a>
+apos rejeitar: NORMAL atuacoes 5
+2026-10-16T18:40:50-03:00 publicar seq01
+2026-10-16T18:40:52-03:00 publicar seq03
+seq01 SEM ACIDENTE 0 []
+seq03 INDETERMINADO 1 [('INDETERMINADO', 0.284, 'REVISAO_HUMANA')]
+2026-10-16T18:41:25-03:00 CENTRAL PARADA (teste heartbeat)
+2026-10-16T18:41:55-03:00 CENTRAL RELIGADA
+1 SUSPEITA EM CONTATO {'acks': 12, 'commands': 6, 'decisions': 3, 'events': 3}
+2 SUSPEITA EM CONTATO {'acks': 12, 'commands': 6, 'decisions': 3, 'events': 3}
+3 SUSPEITA EM CONTATO {'acks': 12, 'commands': 6, 'decisions': 3, 'events': 3}
+4 SUSPEITA EM CONTATO {'acks': 12, 'commands': 6, 'decisions': 3, 'events': 3}
+5 SUSPEITA EM CONTATO {'acks': 12, 'commands': 6, 'decisions': 3, 'events': 3}
+2026-10-16T18:42:52-03:00 BOTAO INJECAO pressionado
+1 FALHA SEM CONTATO sem contato recente LWT 24.2
+2 FALHA SEM CONTATO sem contato recente LWT 29.6
+3 SUSPEITA EM CONTATO  None 0.8
+4 SUSPEITA EM CONTATO  None 1.1
+5 SUSPEITA EM CONTATO  None 1.8
+6 SUSPEITA EM CONTATO  None 1.9
+7 SUSPEITA EM CONTATO  None 2.7
+8 SUSPEITA EM CONTATO  None 3.4
+2026-10-16T18:43:50-03:00 REJEITAR (indeterminado revisado) 4b1ae39f-67db-485a-a8fa-d3168a2ac2f5

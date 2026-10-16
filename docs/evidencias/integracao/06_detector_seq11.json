@@ -1,0 +1,48 @@
+{
+  "resultado": "FRONTAL",
+  "events": [
+    {
+      "event_id": "5b18bd76-df2d-4efb-9e0c-b0706d540fc9",
+      "timestamp": "2026-10-16T18:40:22.049-03:00",
+      "camera_id": "CAM-SIM-01",
+      "local": "Rodovia fictícia MV, km 42",
+      "tipo": "FRONTAL",
+      "confianca": {
+        "indice": 0.832,
+        "nivel": "ALTA",
+        "definicao": "Índice heurístico temporal/local; não é probabilidade.",
+        "termos": {
+          "approach": 1.0,
+          "contact": 1.0,
+          "deceleration": 0.9694117727870704,
+          "immobility": 1.0,
+          "category_margin": 0.9999996900114553
+        },
+        "qualidade_local": 0.769
+      },
+      "indicadores": {
+        "veiculos_envolvidos": 2,
+        "faixa_possivelmente_obstruida": "sim",
+        "faixas_obstruidas": [
+          3
+        ],
+        "veiculo_imobilizado": true,
+        "tempo_parado_s": 1.05
+      },
+      "estado": "SUSPEITA",
+      "evidencia": {
+        "quadro": "data/evidence/5b18bd76-df2d-4efb-9e0c-b0706d540fc9.jpg",
+        "tempo_video_s": 5.4,
+        "frame": 108,
+        "observacao": "Aproximação=109.1 px/s; contato observado=1.40 s; proximidade=1.50 s; razão pós/pré=0.031; visibilidade=0.77; Q local=0.77. "
+      },
+      "recomendacao": {
+        "regra": "M1",
+        "recurso": "AVALIACAO_PRIORITARIA_RESGATE_SIMULADO",
+        "justificativa": "Frontal com imobilização observada: avaliação prioritária fictícia."
+      }
+    }
+  ],
+  "frames": 180,
+  "duration_s": 9.0
+}

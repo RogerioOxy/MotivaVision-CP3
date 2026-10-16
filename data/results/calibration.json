@@ -1,0 +1,115 @@
+{
+  "detector_sha256": "47521ac36b664acec0a6e75d7856bad5603904c4f60ee48a87924d934caeb770",
+  "fingerprint": {
+    "vision/detector.py": "47521ac36b664acec0a6e75d7856bad5603904c4f60ee48a87924d934caeb770",
+    "vision/parameters.py": "f3f47b08c564ab626286def8c591c2035c8f4c35e4f6b81506c098a0a18b14ef",
+    "central/protocol.py": "80ac845021ade77edc9bbd76f4b15521027ee41189568ecd39a8917fa89bd5e4",
+    "tools/generate.py": "f349e6947fc74034ac99eeca4402b9a7ddca8de1519098c2fc518e26197d72c3",
+    "tools/evaluate.py": "2edfb9e2306d96dc135436748f1d25ecfe289b8e60c814e85280d8f3b63dff0a",
+    "manifest": "9bf22698ed46307101b4e1010d06219523dd7551b68a2668eda72262bdea9ca4",
+    "data/videos/seq01.mp4": "6cf019901f2240ebd7f5b5a9703123ade2b05717213dace1ea8595a13b3b948a",
+    "data/videos/seq02.mp4": "76a599dfcaab989dd5b8c78225f5c795f0c81c8d89493897c85f18e0200dd450",
+    "data/videos/seq03.mp4": "eeac17c04cb4d8661d3ecd3ca8a2df9815f6ff52b7aebad2cfa4f930db49eb8d",
+    "data/videos/seq04.mp4": "c869843b1e5df59a593b5d5f7c20444419fea12f24e4dbb2e61a14e28401d911",
+    "data/videos/seq05.mp4": "e72e9c617cf5f60950f168d0bb53e0af5b8e92d35825b5547e2ca09970dedb92",
+    "data/videos/seq06.mp4": "6e9bf1e1a8ff1cd402e34fcb005b468995592fcbf2e322ef62a7cc3d181a3885",
+    "data/videos/seq07.mp4": "023aebb1d7c28b72e14ac7c6f1d10c58de45e83ef99f792ad15a3e51c5cc2b7b",
+    "data/videos/seq08.mp4": "1e396b7c8b8204e3c87faf58d765e6ca7a8ca10fc3c6a6bc7aaa43b002eb4232",
+    "data/videos/seq09.mp4": "c5ed2b5c56a5e84ac7dcb767f63dc52b6448f5aa2ab1808f433feeb294937c5f",
+    "data/videos/seq10.mp4": "a5fed10295adac842be792f00730534496ce0dfd2d08c4f714909ea2d55afce4",
+    "data/videos/seq11.mp4": "7a08520f1be524ea76293ffa3ab651dabf4833b76f0a396ba6c213a2f1129683",
+    "data/videos/seq12.mp4": "6d9a08de7ef0e7ddc028171c07e309836d67d5dd1b0b452f09db4fcd0e067a45"
+  },
+  "parameters": {
+    "confidence_threshold": 0.6,
+    "foreground_delta": 28,
+    "contact_gap_px": 10,
+    "candidate_gap_px": 25,
+    "min_approach_px_s": 12,
+    "history_seconds": 0.55,
+    "post_contact_seconds": 1.45,
+    "post_speed_ratio": 0.55,
+    "dedup_seconds": 8,
+    "dedup_radius_px": 140,
+    "lane_bounds_px": [
+      [
+        65,
+        120
+      ],
+      [
+        120,
+        175
+      ],
+      [
+        175,
+        230
+      ],
+      [
+        230,
+        285
+      ]
+    ],
+    "weights": {
+      "approach": 0.2,
+      "contact": 0.2,
+      "deceleration": 0.25,
+      "immobility": 0.15,
+      "category_margin": 0.2
+    }
+  },
+  "timestamp": "2026-10-16T17:59:37.711-03:00",
+  "basis": "Somente seis dev: Q fraca 0,284; menor colisão 0,612. Limiar 0,60.",
+  "development": "Janela 0,95→1,45 s; limiar inicial 0,68→0,60; nenhum final consultado.",
+  "source_update": {
+    "timestamp": "2026-10-16T19:12:37.697-03:00",
+    "reason": "alteração apenas de comentários: acentuação da docstring de parâmetros; lógica e limiares preservados",
+    "previous_fingerprint": {
+      "vision/detector.py": "1f6e0911180b4c5aa1dcbc37757f8c81bfb374db4ac0b8b32c8e23148bc984de",
+      "vision/parameters.py": "a58a3bb11d55bf32ed9d5a8fcf4b65c4abe285def0ddd66a19f5002b6a3395cf",
+      "central/protocol.py": "1dca069c8f94cf31215972ebcdc82bae6bc6a24e441dccab14d82f0a57e61624",
+      "tools/generate.py": "bdd3a1490bd0cfda87d2fa6c0a8cb3173cda3b01a2ab58e41c250c90efac589f",
+      "tools/evaluate.py": "07cab6688ea2b2650bd217e2b1a216446d394bddf5b2bc2598babc2a1b4ad3d5",
+      "manifest": "6c6e5a595198ef40059618b6d40093b8b9fd3b92061aae38d147d6d241158f9a",
+      "data/videos/seq01.mp4": "6cf019901f2240ebd7f5b5a9703123ade2b05717213dace1ea8595a13b3b948a",
+      "data/videos/seq02.mp4": "76a599dfcaab989dd5b8c78225f5c795f0c81c8d89493897c85f18e0200dd450",
+      "data/videos/seq03.mp4": "eeac17c04cb4d8661d3ecd3ca8a2df9815f6ff52b7aebad2cfa4f930db49eb8d",
+      "data/videos/seq04.mp4": "c869843b1e5df59a593b5d5f7c20444419fea12f24e4dbb2e61a14e28401d911",
+      "data/videos/seq05.mp4": "e72e9c617cf5f60950f168d0bb53e0af5b8e92d35825b5547e2ca09970dedb92",
+      "data/videos/seq06.mp4": "6e9bf1e1a8ff1cd402e34fcb005b468995592fcbf2e322ef62a7cc3d181a3885",
+      "data/videos/seq07.mp4": "023aebb1d7c28b72e14ac7c6f1d10c58de45e83ef99f792ad15a3e51c5cc2b7b",
+      "data/videos/seq08.mp4": "1e396b7c8b8204e3c87faf58d765e6ca7a8ca10fc3c6a6bc7aaa43b002eb4232",
+      "data/videos/seq09.mp4": "c5ed2b5c56a5e84ac7dcb767f63dc52b6448f5aa2ab1808f433feeb294937c5f",
+      "data/videos/seq10.mp4": "a5fed10295adac842be792f00730534496ce0dfd2d08c4f714909ea2d55afce4",
+      "data/videos/seq11.mp4": "7a08520f1be524ea76293ffa3ab651dabf4833b76f0a396ba6c213a2f1129683",
+      "data/videos/seq12.mp4": "6d9a08de7ef0e7ddc028171c07e309836d67d5dd1b0b452f09db4fcd0e067a45"
+    },
+    "original_calibration_timestamp": "2026-10-16T17:59:37.711-03:00",
+    "verification": "equivalencia.json"
+  },
+  "hash_policy": "SHA-256: fontes e manifesto com CRLF convertido em LF; vídeos em bytes crus.",
+  "line_ending_update": {
+    "timestamp": "2026-10-16T19:23:21.313-03:00",
+    "reason": "Reprodutibilidade entre Windows e Unix: normalização CRLF para LF somente nos hashes de texto; lógica do detector e parâmetros preservados. O avaliador mudou apenas a política de hash.",
+    "previous_fingerprint": {
+      "vision/detector.py": "1f6e0911180b4c5aa1dcbc37757f8c81bfb374db4ac0b8b32c8e23148bc984de",
+      "vision/parameters.py": "9b1237d9e2e24a57b0b975c0606022df5fa7e1851bb2eda06fb8adccbc9c7dc7",
+      "central/protocol.py": "1dca069c8f94cf31215972ebcdc82bae6bc6a24e441dccab14d82f0a57e61624",
+      "tools/generate.py": "bdd3a1490bd0cfda87d2fa6c0a8cb3173cda3b01a2ab58e41c250c90efac589f",
+      "tools/evaluate.py": "07cab6688ea2b2650bd217e2b1a216446d394bddf5b2bc2598babc2a1b4ad3d5",
+      "manifest": "6c6e5a595198ef40059618b6d40093b8b9fd3b92061aae38d147d6d241158f9a",
+      "data/videos/seq01.mp4": "6cf019901f2240ebd7f5b5a9703123ade2b05717213dace1ea8595a13b3b948a",
+      "data/videos/seq02.mp4": "76a599dfcaab989dd5b8c78225f5c795f0c81c8d89493897c85f18e0200dd450",
+      "data/videos/seq03.mp4": "eeac17c04cb4d8661d3ecd3ca8a2df9815f6ff52b7aebad2cfa4f930db49eb8d",
+      "data/videos/seq04.mp4": "c869843b1e5df59a593b5d5f7c20444419fea12f24e4dbb2e61a14e28401d911",
+      "data/videos/seq05.mp4": "e72e9c617cf5f60950f168d0bb53e0af5b8e92d35825b5547e2ca09970dedb92",
+      "data/videos/seq06.mp4": "6e9bf1e1a8ff1cd402e34fcb005b468995592fcbf2e322ef62a7cc3d181a3885",
+      "data/videos/seq07.mp4": "023aebb1d7c28b72e14ac7c6f1d10c58de45e83ef99f792ad15a3e51c5cc2b7b",
+      "data/videos/seq08.mp4": "1e396b7c8b8204e3c87faf58d765e6ca7a8ca10fc3c6a6bc7aaa43b002eb4232",
+      "data/videos/seq09.mp4": "c5ed2b5c56a5e84ac7dcb767f63dc52b6448f5aa2ab1808f433feeb294937c5f",
+      "data/videos/seq10.mp4": "a5fed10295adac842be792f00730534496ce0dfd2d08c4f714909ea2d55afce4",
+      "data/videos/seq11.mp4": "7a08520f1be524ea76293ffa3ab651dabf4833b76f0a396ba6c213a2f1129683",
+      "data/videos/seq12.mp4": "6d9a08de7ef0e7ddc028171c07e309836d67d5dd1b0b452f09db4fcd0e067a45"
+    },
+    "verification": "eol-equivalence.json"
+  }
+}

@@ -1,0 +1,422 @@
+[
+  {
+    "video": "seq01.mp4",
+    "split": "dev",
+    "expected": "SEM ACIDENTE",
+    "scenario": "normal",
+    "seed": 562021,
+    "duration_s": 6.8,
+    "impact_s": 2.0,
+    "impact_xy": [
+      240,
+      100
+    ],
+    "direction": 1,
+    "impact_angle_deg": 0,
+    "actors": 5,
+    "vehicle_sizes_px": [
+      [
+        40,
+        20
+      ],
+      [
+        38.0,
+        19.0
+      ],
+      [
+        36,
+        18
+      ],
+      [
+        45,
+        20
+      ],
+      [
+        54,
+        22
+      ]
+    ],
+    "similar_colors": true
+  },
+  {
+    "video": "seq02.mp4",
+    "split": "final",
+    "expected": "LATERAL",
+    "scenario": "lateral",
+    "seed": 562100,
+    "duration_s": 8.6,
+    "impact_s": 4.5,
+    "impact_xy": [
+      310,
+      49
+    ],
+    "direction": -1,
+    "impact_angle_deg": 125,
+    "actors": 4,
+    "vehicle_sizes_px": [
+      [
+        66,
+        25
+      ],
+      [
+        46.0,
+        22.0
+      ],
+      [
+        36,
+        18
+      ],
+      [
+        45,
+        20
+      ]
+    ],
+    "similar_colors": true
+  },
+  {
+    "video": "seq03.mp4",
+    "split": "dev",
+    "expected": "INDETERMINADO",
+    "scenario": "rain",
+    "seed": 562179,
+    "duration_s": 7.4,
+    "impact_s": 3.6,
+    "impact_xy": [
+      275,
+      155
+    ],
+    "direction": 1,
+    "impact_angle_deg": 68,
+    "actors": 4,
+    "vehicle_sizes_px": [
+      [
+        43,
+        21
+      ],
+      [
+        38.0,
+        19.0
+      ],
+      [
+        36,
+        18
+      ],
+      [
+        45,
+        20
+      ]
+    ],
+    "similar_colors": false
+  },
+  {
+    "video": "seq04.mp4",
+    "split": "dev",
+    "expected": "TRASEIRA",
+    "scenario": "rear",
+    "seed": 562258,
+    "duration_s": 7.2,
+    "impact_s": 2.4,
+    "impact_xy": [
+      300,
+      96
+    ],
+    "direction": 1,
+    "impact_angle_deg": 0,
+    "actors": 4,
+    "vehicle_sizes_px": [
+      [
+        42,
+        20
+      ],
+      [
+        38.0,
+        19.0
+      ],
+      [
+        42,
+        20
+      ],
+      [
+        36,
+        18
+      ]
+    ],
+    "similar_colors": true
+  },
+  {
+    "video": "seq05.mp4",
+    "split": "final",
+    "expected": "SEM ACIDENTE",
+    "scenario": "braking",
+    "seed": 562337,
+    "duration_s": 8.8,
+    "impact_s": 3.1,
+    "impact_xy": [
+      280,
+      145
+    ],
+    "direction": 1,
+    "impact_angle_deg": 0,
+    "actors": 4,
+    "vehicle_sizes_px": [
+      [
+        64,
+        24
+      ],
+      [
+        46.0,
+        22.0
+      ],
+      [
+        36,
+        18
+      ],
+      [
+        45,
+        20
+      ]
+    ],
+    "similar_colors": true
+  },
+  {
+    "video": "seq06.mp4",
+    "split": "final",
+    "expected": "FRONTAL",
+    "scenario": "front",
+    "seed": 562416,
+    "duration_s": 6.6,
+    "impact_s": 2.8,
+    "impact_xy": [
+      335,
+      116
+    ],
+    "direction": 1,
+    "impact_angle_deg": 180,
+    "actors": 3,
+    "vehicle_sizes_px": [
+      [
+        62,
+        24
+      ],
+      [
+        46.0,
+        22.0
+      ],
+      [
+        36,
+        18
+      ]
+    ],
+    "similar_colors": false
+  },
+  {
+    "video": "seq07.mp4",
+    "split": "dev",
+    "expected": "SEM ACIDENTE",
+    "scenario": "parked",
+    "seed": 562495,
+    "duration_s": 8.0,
+    "impact_s": 3.0,
+    "impact_xy": [
+      340,
+      300
+    ],
+    "direction": -1,
+    "impact_angle_deg": 0,
+    "actors": 5,
+    "vehicle_sizes_px": [
+      [
+        70,
+        25
+      ],
+      [
+        38.0,
+        19.0
+      ],
+      [
+        36,
+        18
+      ],
+      [
+        45,
+        20
+      ],
+      [
+        54,
+        22
+      ]
+    ],
+    "similar_colors": true
+  },
+  {
+    "video": "seq08.mp4",
+    "split": "dev",
+    "expected": "LATERAL",
+    "scenario": "lateral",
+    "seed": 562574,
+    "duration_s": 7.8,
+    "impact_s": 3.2,
+    "impact_xy": [
+      210,
+      155
+    ],
+    "direction": 1,
+    "impact_angle_deg": 55,
+    "actors": 3,
+    "vehicle_sizes_px": [
+      [
+        44,
+        21
+      ],
+      [
+        38.0,
+        19.0
+      ],
+      [
+        36,
+        18
+      ]
+    ],
+    "similar_colors": true
+  },
+  {
+    "video": "seq09.mp4",
+    "split": "final",
+    "expected": "INDETERMINADO",
+    "scenario": "occlusion",
+    "seed": 562653,
+    "duration_s": 9.4,
+    "impact_s": 5.0,
+    "impact_xy": [
+      210,
+      210
+    ],
+    "direction": -1,
+    "impact_angle_deg": 180,
+    "actors": 4,
+    "vehicle_sizes_px": [
+      [
+        48,
+        22
+      ],
+      [
+        46.0,
+        22.0
+      ],
+      [
+        36,
+        18
+      ],
+      [
+        45,
+        20
+      ]
+    ],
+    "similar_colors": false
+  },
+  {
+    "video": "seq10.mp4",
+    "split": "final",
+    "expected": "TRASEIRA",
+    "scenario": "rear",
+    "seed": 562732,
+    "duration_s": 8.2,
+    "impact_s": 3.7,
+    "impact_xy": [
+      190,
+      258
+    ],
+    "direction": -1,
+    "impact_angle_deg": 180,
+    "actors": 3,
+    "vehicle_sizes_px": [
+      [
+        68,
+        24
+      ],
+      [
+        46.0,
+        22.0
+      ],
+      [
+        36,
+        18
+      ]
+    ],
+    "similar_colors": true
+  },
+  {
+    "video": "seq11.mp4",
+    "split": "dev",
+    "expected": "FRONTAL",
+    "scenario": "front",
+    "seed": 562811,
+    "duration_s": 9.0,
+    "impact_s": 4.1,
+    "impact_xy": [
+      260,
+      205
+    ],
+    "direction": -1,
+    "impact_angle_deg": 0,
+    "actors": 4,
+    "vehicle_sizes_px": [
+      [
+        40,
+        20
+      ],
+      [
+        38.0,
+        19.0
+      ],
+      [
+        36,
+        18
+      ],
+      [
+        45,
+        20
+      ]
+    ],
+    "similar_colors": true
+  },
+  {
+    "video": "seq12.mp4",
+    "split": "final",
+    "expected": "SEM ACIDENTE",
+    "scenario": "near",
+    "seed": 562890,
+    "duration_s": 7.6,
+    "impact_s": 3.4,
+    "impact_xy": [
+      245,
+      140
+    ],
+    "direction": 1,
+    "impact_angle_deg": 0,
+    "actors": 5,
+    "vehicle_sizes_px": [
+      [
+        46,
+        21
+      ],
+      [
+        46.0,
+        22.0
+      ],
+      [
+        36,
+        18
+      ],
+      [
+        45,
+        20
+      ],
+      [
+        54,
+        22
+      ]
+    ],
+    "similar_colors": false
+  }
+]

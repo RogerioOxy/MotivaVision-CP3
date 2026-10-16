@@ -1,0 +1,1 @@
+"""Central operacional de demonstração."""

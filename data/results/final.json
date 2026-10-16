@@ -1,0 +1,209 @@
+[
+  {
+    "video": "seq02.mp4",
+    "split": "final",
+    "scenario": "lateral",
+    "expected": "LATERAL",
+    "obtained": "SEM ACIDENTE",
+    "correct": false,
+    "events": 0,
+    "score": null,
+    "rule": "SEM_EVENTO",
+    "false_positive": false,
+    "false_negative": true,
+    "misclassification": false,
+    "processing_s": 0.562,
+    "video_s": 8.6,
+    "evidence": [],
+    "payloads": []
+  },
+  {
+    "video": "seq05.mp4",
+    "split": "final",
+    "scenario": "braking",
+    "expected": "SEM ACIDENTE",
+    "obtained": "SEM ACIDENTE",
+    "correct": true,
+    "events": 0,
+    "score": null,
+    "rule": "SEM_EVENTO",
+    "false_positive": false,
+    "false_negative": false,
+    "misclassification": false,
+    "processing_s": 0.728,
+    "video_s": 8.8,
+    "evidence": [],
+    "payloads": []
+  },
+  {
+    "video": "seq06.mp4",
+    "split": "final",
+    "scenario": "front",
+    "expected": "FRONTAL",
+    "obtained": "FRONTAL",
+    "correct": true,
+    "events": 1,
+    "score": 0.757,
+    "rule": "M1",
+    "false_positive": false,
+    "false_negative": false,
+    "misclassification": false,
+    "processing_s": 0.421,
+    "video_s": 6.6,
+    "evidence": [
+      {
+        "quadro": "data/evidence/754c835a-44fc-46f6-969e-44c93ee55487.jpg",
+        "tempo_video_s": 3.95,
+        "frame": 79,
+        "observacao": "Aproximação=126.0 px/s; contato observado=1.25 s; proximidade=1.45 s; razão pós/pré=0.027; visibilidade=0.66; Q local=0.66. "
+      }
+    ],
+    "payloads": [
+      {
+        "event_id": "754c835a-44fc-46f6-969e-44c93ee55487",
+        "timestamp": "2026-10-16T19:26:00.704-03:00",
+        "camera_id": "CAM-SIM-01",
+        "local": "Rodovia fictícia MV, km 42",
+        "tipo": "FRONTAL",
+        "confianca": {
+          "indice": 0.757,
+          "nivel": "ALTA",
+          "definicao": "Índice heurístico temporal/local; não é probabilidade.",
+          "termos": {
+            "approach": 1.0,
+            "contact": 1.0,
+            "deceleration": 0.9728396355524083,
+            "immobility": 1.0,
+            "category_margin": 0.9996968386415285
+          },
+          "qualidade_local": 0.66
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 2,
+          "faixa_possivelmente_obstruida": "sim",
+          "faixas_obstruidas": [
+            1,
+            2
+          ],
+          "veiculo_imobilizado": true,
+          "tempo_parado_s": 0.9
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "quadro": "data/evidence/754c835a-44fc-46f6-969e-44c93ee55487.jpg",
+          "tempo_video_s": 3.95,
+          "frame": 79,
+          "observacao": "Aproximação=126.0 px/s; contato observado=1.25 s; proximidade=1.45 s; razão pós/pré=0.027; visibilidade=0.66; Q local=0.66. "
+        },
+        "recomendacao": {
+          "regra": "M1",
+          "recurso": "AVALIACAO_PRIORITARIA_RESGATE_SIMULADO",
+          "justificativa": "Frontal com imobilização observada: avaliação prioritária fictícia."
+        }
+      }
+    ]
+  },
+  {
+    "video": "seq09.mp4",
+    "split": "final",
+    "scenario": "occlusion",
+    "expected": "INDETERMINADO",
+    "obtained": "SEM ACIDENTE",
+    "correct": false,
+    "events": 0,
+    "score": null,
+    "rule": "SEM_EVENTO",
+    "false_positive": false,
+    "false_negative": false,
+    "misclassification": false,
+    "processing_s": 0.639,
+    "video_s": 9.4,
+    "evidence": [],
+    "payloads": []
+  },
+  {
+    "video": "seq10.mp4",
+    "split": "final",
+    "scenario": "rear",
+    "expected": "TRASEIRA",
+    "obtained": "TRASEIRA",
+    "correct": true,
+    "events": 1,
+    "score": 0.719,
+    "rule": "M4",
+    "false_positive": false,
+    "false_negative": false,
+    "misclassification": false,
+    "processing_s": 0.499,
+    "video_s": 8.2,
+    "evidence": [
+      {
+        "quadro": "data/evidence/565af182-27f7-48c5-ad8d-ad462b8e6125.jpg",
+        "tempo_video_s": 4.65,
+        "frame": 93,
+        "observacao": "Aproximação=48.0 px/s; contato observado=1.15 s; proximidade=1.45 s; razão pós/pré=0.029; visibilidade=0.68; Q local=0.68. "
+      }
+    ],
+    "payloads": [
+      {
+        "event_id": "565af182-27f7-48c5-ad8d-ad462b8e6125",
+        "timestamp": "2026-10-16T19:26:01.776-03:00",
+        "camera_id": "CAM-SIM-01",
+        "local": "Rodovia fictícia MV, km 42",
+        "tipo": "TRASEIRA",
+        "confianca": {
+          "indice": 0.719,
+          "nivel": "ALTA",
+          "definicao": "Índice heurístico temporal/local; não é probabilidade.",
+          "termos": {
+            "approach": 0.6545454545346802,
+            "contact": 1.0,
+            "deceleration": 0.971197113599942,
+            "immobility": 1.0,
+            "category_margin": 0.9999999999984346
+          },
+          "qualidade_local": 0.684
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 2,
+          "faixa_possivelmente_obstruida": "sim",
+          "faixas_obstruidas": [
+            4
+          ],
+          "veiculo_imobilizado": true,
+          "tempo_parado_s": 0.75
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "quadro": "data/evidence/565af182-27f7-48c5-ad8d-ad462b8e6125.jpg",
+          "tempo_video_s": 4.65,
+          "frame": 93,
+          "observacao": "Aproximação=48.0 px/s; contato observado=1.15 s; proximidade=1.45 s; razão pós/pré=0.029; visibilidade=0.68; Q local=0.68. "
+        },
+        "recomendacao": {
+          "regra": "M4",
+          "recurso": "EQUIPE_OPERACIONAL",
+          "justificativa": "Traseira/lateral com imobilização: avaliação operacional fictícia."
+        }
+      }
+    ]
+  },
+  {
+    "video": "seq12.mp4",
+    "split": "final",
+    "scenario": "near",
+    "expected": "SEM ACIDENTE",
+    "obtained": "SEM ACIDENTE",
+    "correct": true,
+    "events": 0,
+    "score": null,
+    "rule": "SEM_EVENTO",
+    "false_positive": false,
+    "false_negative": false,
+    "misclassification": false,
+    "processing_s": 0.625,
+    "video_s": 7.6,
+    "evidence": [],
+    "payloads": []
+  }
+]

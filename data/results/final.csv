@@ -1,0 +1,7 @@
+﻿video,split,scenario,expected,obtained,correct,events,score,rule,false_positive,false_negative,misclassification,processing_s,video_s,evidence
+seq02.mp4,final,lateral,LATERAL,SEM ACIDENTE,False,0,,SEM_EVENTO,False,True,False,0.562,8.6,[]
+seq05.mp4,final,braking,SEM ACIDENTE,SEM ACIDENTE,True,0,,SEM_EVENTO,False,False,False,0.728,8.8,[]
+seq06.mp4,final,front,FRONTAL,FRONTAL,True,1,0.757,M1,False,False,False,0.421,6.6,"[{'quadro': 'data/evidence/754c835a-44fc-46f6-969e-44c93ee55487.jpg', 'tempo_video_s': 3.95, 'frame': 79, 'observacao': 'Aproximação=126.0 px/s; contato observado=1.25 s; proximidade=1.45 s; razão pós/pré=0.027; visibilidade=0.66; Q local=0.66. '}]"
+seq09.mp4,final,occlusion,INDETERMINADO,SEM ACIDENTE,False,0,,SEM_EVENTO,False,False,False,0.639,9.4,[]
+seq10.mp4,final,rear,TRASEIRA,TRASEIRA,True,1,0.719,M4,False,False,False,0.499,8.2,"[{'quadro': 'data/evidence/565af182-27f7-48c5-ad8d-ad462b8e6125.jpg', 'tempo_video_s': 4.65, 'frame': 93, 'observacao': 'Aproximação=48.0 px/s; contato observado=1.15 s; proximidade=1.45 s; razão pós/pré=0.029; visibilidade=0.68; Q local=0.68. '}]"
+seq12.mp4,final,near,SEM ACIDENTE,SEM ACIDENTE,True,0,,SEM_EVENTO,False,False,False,0.625,7.6,[]

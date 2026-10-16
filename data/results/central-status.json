@@ -1,0 +1,25 @@
+{
+  "conectado": true,
+  "contagens": {
+    "acks": 4,
+    "commands": 2,
+    "decisions": 1,
+    "events": 1
+  },
+  "dispositivo": {
+    "contato": "EM CONTATO",
+    "desatualizado": false,
+    "estado": "CONFIRMADO",
+    "motivo": "",
+    "timeout_s": 7.0,
+    "ultimo_status": {
+      "estado": "CONFIRMADO",
+      "origem": "MODELO_PYTHON_OFFLINE",
+      "timestamp": "2026-10-16T19:28:13.241-03:00"
+    }
+  },
+  "erro": null,
+  "idade_contato_s": 0.0,
+  "transporte": "MEMORIA_OFFLINE",
+  "ultimo_contato": "2026-10-16T19:28:13.241-03:00"
+}

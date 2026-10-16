@@ -1,0 +1,308 @@
+[
+  {
+    "video": "seq01.mp4",
+    "split": "dev",
+    "scenario": "normal",
+    "expected": "SEM ACIDENTE",
+    "obtained": "SEM ACIDENTE",
+    "correct": true,
+    "events": 0,
+    "score": null,
+    "rule": "SEM_EVENTO",
+    "false_positive": false,
+    "false_negative": false,
+    "misclassification": false,
+    "processing_s": 0.902,
+    "video_s": 6.8,
+    "evidence": [],
+    "payloads": []
+  },
+  {
+    "video": "seq03.mp4",
+    "split": "dev",
+    "scenario": "rain",
+    "expected": "INDETERMINADO",
+    "obtained": "INDETERMINADO",
+    "correct": true,
+    "events": 1,
+    "score": 0.284,
+    "rule": "M0",
+    "false_positive": false,
+    "false_negative": false,
+    "misclassification": false,
+    "processing_s": 0.685,
+    "video_s": 7.4,
+    "evidence": [
+      {
+        "quadro": "data/evidence/b44016a4-40bd-4ccd-b843-947c97df3375.jpg",
+        "tempo_video_s": 4.6,
+        "frame": 92,
+        "observacao": "Aproximação=49.8 px/s; contato observado=1.20 s; proximidade=1.50 s; razão pós/pré=0.013; visibilidade=0.73; Q local=0.08. Evidência temporal/local insuficiente: contato parcial ou degradado; revisão humana."
+      }
+    ],
+    "payloads": [
+      {
+        "event_id": "b44016a4-40bd-4ccd-b843-947c97df3375",
+        "timestamp": "2026-10-16T19:12:39.034-03:00",
+        "camera_id": "CAM-SIM-01",
+        "local": "Rodovia fictícia MV, km 42",
+        "tipo": "INDETERMINADO",
+        "confianca": {
+          "indice": 0.284,
+          "nivel": "INSUFICIENTE",
+          "definicao": "Índice heurístico temporal/local; não é probabilidade.",
+          "termos": {
+            "approach": 0.6872969972294588,
+            "contact": 1.0,
+            "deceleration": 0.9871280182501225,
+            "immobility": 1.0,
+            "category_margin": 0.3580938582300811
+          },
+          "qualidade_local": 0.075
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 2,
+          "faixa_possivelmente_obstruida": "sim",
+          "faixas_obstruidas": [
+            1,
+            2
+          ],
+          "veiculo_imobilizado": true,
+          "tempo_parado_s": 0.75
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "quadro": "data/evidence/b44016a4-40bd-4ccd-b843-947c97df3375.jpg",
+          "tempo_video_s": 4.6,
+          "frame": 92,
+          "observacao": "Aproximação=49.8 px/s; contato observado=1.20 s; proximidade=1.50 s; razão pós/pré=0.013; visibilidade=0.73; Q local=0.08. Evidência temporal/local insuficiente: contato parcial ou degradado; revisão humana."
+        },
+        "recomendacao": {
+          "regra": "M0",
+          "recurso": "REVISAO_HUMANA",
+          "justificativa": "Evidência insuficiente; revisar sem concluir tipo ou gravidade."
+        }
+      }
+    ]
+  },
+  {
+    "video": "seq04.mp4",
+    "split": "dev",
+    "scenario": "rear",
+    "expected": "TRASEIRA",
+    "obtained": "TRASEIRA",
+    "correct": true,
+    "events": 1,
+    "score": 0.727,
+    "rule": "M3",
+    "false_positive": false,
+    "false_negative": false,
+    "misclassification": false,
+    "processing_s": 0.661,
+    "video_s": 7.2,
+    "evidence": [
+      {
+        "quadro": "data/evidence/f1628558-c952-4955-b41e-4af2e0582846.jpg",
+        "tempo_video_s": 3.15,
+        "frame": 63,
+        "observacao": "Aproximação=34.4 px/s; contato observado=1.05 s; proximidade=1.45 s; razão pós/pré=0.032; visibilidade=0.79; Q local=0.79. "
+      }
+    ],
+    "payloads": [
+      {
+        "event_id": "f1628558-c952-4955-b41e-4af2e0582846",
+        "timestamp": "2026-10-16T19:12:39.594-03:00",
+        "camera_id": "CAM-SIM-01",
+        "local": "Rodovia fictícia MV, km 42",
+        "tipo": "TRASEIRA",
+        "confianca": {
+          "indice": 0.727,
+          "nivel": "ALTA",
+          "definicao": "Índice heurístico temporal/local; não é probabilidade.",
+          "termos": {
+            "approach": 0.406815958761805,
+            "contact": 1.0,
+            "deceleration": 0.9684874471787224,
+            "immobility": 0.8461538461538461,
+            "category_margin": 0.9999999999984527
+          },
+          "qualidade_local": 0.792
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 3,
+          "faixa_possivelmente_obstruida": "sim",
+          "faixas_obstruidas": [
+            1
+          ],
+          "veiculo_imobilizado": true,
+          "tempo_parado_s": 0.55
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "quadro": "data/evidence/f1628558-c952-4955-b41e-4af2e0582846.jpg",
+          "tempo_video_s": 3.15,
+          "frame": 63,
+          "observacao": "Aproximação=34.4 px/s; contato observado=1.05 s; proximidade=1.45 s; razão pós/pré=0.032; visibilidade=0.79; Q local=0.79. "
+        },
+        "recomendacao": {
+          "regra": "M3",
+          "recurso": "AMBULANCIA_SIMULADA",
+          "justificativa": "Traseira com três ou mais envolvidos: sugestão fictícia."
+        }
+      }
+    ]
+  },
+  {
+    "video": "seq07.mp4",
+    "split": "dev",
+    "scenario": "parked",
+    "expected": "SEM ACIDENTE",
+    "obtained": "SEM ACIDENTE",
+    "correct": true,
+    "events": 0,
+    "score": null,
+    "rule": "SEM_EVENTO",
+    "false_positive": false,
+    "false_negative": false,
+    "misclassification": false,
+    "processing_s": 1.021,
+    "video_s": 8.0,
+    "evidence": [],
+    "payloads": []
+  },
+  {
+    "video": "seq08.mp4",
+    "split": "dev",
+    "scenario": "lateral",
+    "expected": "LATERAL",
+    "obtained": "LATERAL",
+    "correct": true,
+    "events": 1,
+    "score": 0.612,
+    "rule": "M2",
+    "false_positive": false,
+    "false_negative": false,
+    "misclassification": false,
+    "processing_s": 0.651,
+    "video_s": 7.8,
+    "evidence": [
+      {
+        "quadro": "data/evidence/85b1131d-9bfb-4294-867e-118eb4d7aebb.jpg",
+        "tempo_video_s": 4.1,
+        "frame": 82,
+        "observacao": "Aproximação=45.1 px/s; contato observado=1.05 s; proximidade=1.50 s; razão pós/pré=0.034; visibilidade=0.77; Q local=0.77. "
+      }
+    ],
+    "payloads": [
+      {
+        "event_id": "85b1131d-9bfb-4294-867e-118eb4d7aebb",
+        "timestamp": "2026-10-16T19:12:41.339-03:00",
+        "camera_id": "CAM-SIM-01",
+        "local": "Rodovia fictícia MV, km 42",
+        "tipo": "LATERAL",
+        "confianca": {
+          "indice": 0.612,
+          "nivel": "ALTA",
+          "definicao": "Índice heurístico temporal/local; não é probabilidade.",
+          "termos": {
+            "approach": 0.6015232896652651,
+            "contact": 1.0,
+            "deceleration": 0.965674736129156,
+            "immobility": 1.0,
+            "category_margin": 0.07591537009298453
+          },
+          "qualidade_local": 0.774
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 2,
+          "faixa_possivelmente_obstruida": "sim",
+          "faixas_obstruidas": [
+            1,
+            2
+          ],
+          "veiculo_imobilizado": true,
+          "tempo_parado_s": 0.65
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "quadro": "data/evidence/85b1131d-9bfb-4294-867e-118eb4d7aebb.jpg",
+          "tempo_video_s": 4.1,
+          "frame": 82,
+          "observacao": "Aproximação=45.1 px/s; contato observado=1.05 s; proximidade=1.50 s; razão pós/pré=0.034; visibilidade=0.77; Q local=0.77. "
+        },
+        "recomendacao": {
+          "regra": "M2",
+          "recurso": "AMBULANCIA_SIMULADA",
+          "justificativa": "Lateral com faixa possivelmente obstruída: avaliação humana fictícia."
+        }
+      }
+    ]
+  },
+  {
+    "video": "seq11.mp4",
+    "split": "dev",
+    "scenario": "front",
+    "expected": "FRONTAL",
+    "obtained": "FRONTAL",
+    "correct": true,
+    "events": 1,
+    "score": 0.832,
+    "rule": "M1",
+    "false_positive": false,
+    "false_negative": false,
+    "misclassification": false,
+    "processing_s": 0.848,
+    "video_s": 9.0,
+    "evidence": [
+      {
+        "quadro": "data/evidence/749c36ea-cbbd-4583-8142-977810acce0f.jpg",
+        "tempo_video_s": 5.4,
+        "frame": 108,
+        "observacao": "Aproximação=109.1 px/s; contato observado=1.40 s; proximidade=1.50 s; razão pós/pré=0.031; visibilidade=0.77; Q local=0.77. "
+      }
+    ],
+    "payloads": [
+      {
+        "event_id": "749c36ea-cbbd-4583-8142-977810acce0f",
+        "timestamp": "2026-10-16T19:12:42.114-03:00",
+        "camera_id": "CAM-SIM-01",
+        "local": "Rodovia fictícia MV, km 42",
+        "tipo": "FRONTAL",
+        "confianca": {
+          "indice": 0.832,
+          "nivel": "ALTA",
+          "definicao": "Índice heurístico temporal/local; não é probabilidade.",
+          "termos": {
+            "approach": 1.0,
+            "contact": 1.0,
+            "deceleration": 0.9694117727870704,
+            "immobility": 1.0,
+            "category_margin": 0.9999996900114553
+          },
+          "qualidade_local": 0.769
+        },
+        "indicadores": {
+          "veiculos_envolvidos": 2,
+          "faixa_possivelmente_obstruida": "sim",
+          "faixas_obstruidas": [
+            3
+          ],
+          "veiculo_imobilizado": true,
+          "tempo_parado_s": 1.05
+        },
+        "estado": "SUSPEITA",
+        "evidencia": {
+          "quadro": "data/evidence/749c36ea-cbbd-4583-8142-977810acce0f.jpg",
+          "tempo_video_s": 5.4,
+          "frame": 108,
+          "observacao": "Aproximação=109.1 px/s; contato observado=1.40 s; proximidade=1.50 s; razão pós/pré=0.031; visibilidade=0.77; Q local=0.77. "
+        },
+        "recomendacao": {
+          "regra": "M1",
+          "recurso": "AVALIACAO_PRIORITARIA_RESGATE_SIMULADO",
+          "justificativa": "Frontal com imobilização observada: avaliação prioritária fictícia."
+        }
+      }
+    ]
+  }
+]

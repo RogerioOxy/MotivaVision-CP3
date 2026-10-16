@@ -1,0 +1,48 @@
+{
+  "resultado": "TRASEIRA",
+  "events": [
+    {
+      "event_id": "fed9f35e-9e8d-428b-928d-26bcbd7ed0b5",
+      "timestamp": "2026-10-16T18:37:40.247-03:00",
+      "camera_id": "CAM-SIM-01",
+      "local": "Rodovia fictícia MV, km 42",
+      "tipo": "TRASEIRA",
+      "confianca": {
+        "indice": 0.727,
+        "nivel": "ALTA",
+        "definicao": "Índice heurístico temporal/local; não é probabilidade.",
+        "termos": {
+          "approach": 0.406815958761805,
+          "contact": 1.0,
+          "deceleration": 0.9684874471787224,
+          "immobility": 0.8461538461538461,
+          "category_margin": 0.9999999999984527
+        },
+        "qualidade_local": 0.792
+      },
+      "indicadores": {
+        "veiculos_envolvidos": 3,
+        "faixa_possivelmente_obstruida": "sim",
+        "faixas_obstruidas": [
+          1
+        ],
+        "veiculo_imobilizado": true,
+        "tempo_parado_s": 0.55
+      },
+      "estado": "SUSPEITA",
+      "evidencia": {
+        "quadro": "data/evidence/fed9f35e-9e8d-428b-928d-26bcbd7ed0b5.jpg",
+        "tempo_video_s": 3.15,
+        "frame": 63,
+        "observacao": "Aproximação=34.4 px/s; contato observado=1.05 s; proximidade=1.45 s; razão pós/pré=0.032; visibilidade=0.79; Q local=0.79. "
+      },
+      "recomendacao": {
+        "regra": "M3",
+        "recurso": "AMBULANCIA_SIMULADA",
+        "justificativa": "Traseira com três ou mais envolvidos: sugestão fictícia."
+      }
+    }
+  ],
+  "frames": 144,
+  "duration_s": 7.2
+}
