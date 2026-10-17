@@ -4,8 +4,7 @@
 
 ## Wokwi
 
-PENDENTE_LINK_WOKWI
+[Projeto público Motiva Vision](https://wokwi.com/projects/478084264348027905)
 
-Substitua somente a linha acima pelo endereço compartilhável após salvar o projeto
-na conta do responsável. O README, o relatório e o roteiro apontam para esta página.
-Para recriar a montagem sem esse endereço, siga [WOKWI.md](WOKWI.md).
+O projeto contém os arquivos `sketch.ino`, `diagram.json` e `libraries.txt`
+de `esp32/`. Para recriar a montagem, siga [WOKWI.md](WOKWI.md).

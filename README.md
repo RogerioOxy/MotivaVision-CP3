@@ -28,8 +28,8 @@ Resultados gerados em `data/results/`: `dev.md`, `final.md`, JSON/CSV,
 [Relatório HTML A4](docs/relatorio/relatorio.html), com figuras locais embutidas,
 sumário e oito testes obrigatórios calculados dos artefatos. [Rastreabilidade](docs/RASTREABILIDADE.md).
 Repositório: https://github.com/RogerioOxy/MotivaVision-CP3.
-O **único local para preencher o link compartilhável do Wokwi** é
-[docs/LINKS.md, seção Wokwi](docs/LINKS.md#wokwi).
+Projeto público no Wokwi: [https://wokwi.com/projects/478084264348027905](https://wokwi.com/projects/478084264348027905).
+O endereço também consta em [docs/LINKS.md](docs/LINKS.md#wokwi).
 Há [instruções para recriar o projeto a partir de esp32/](docs/WOKWI.md).
 
 ## Estrutura
@@ -39,7 +39,7 @@ vision/              detector.py e parameters.py (calibração única)
 central/             Flask, SQLite, MQTT e modelo Python do dispositivo
 esp32/               sketch.ino, diagram.json e libraries.txt
 tools/               generate, evaluate, demo e construtor documental do relatório
-tests/               testes sem rede; temporários em data/results/test-tmp/
+tests/               testes sem rede; temporários em tests/test-tmp/
 data/videos/         seq01.mp4–seq12.mp4
 data/labels.json     parâmetros e rótulos separados da visão
 data/evidence/       JPGs com instante e marcação da região
@@ -71,7 +71,7 @@ $env:PYTHONIOENCODING='utf-8'
 
 O gerador reescreve os 12 vídeos. O congelamento guarda hashes de fontes, parâmetros, manifesto e vídeos. A avaliação final recusa alterações posteriores. Para uma nova pesquisa, use um novo conjunto final; repetir o mesmo final após ajustar o detector não é uma validação independente. UUIDs e horários de novas execuções mudam; classes e escores são determinísticos no mesmo ambiente.
 
-A fixture `tmp_path` cria e remove pastas isoladas em `data/results/test-tmp/`.
+A fixture `tmp_path` cria e remove pastas isoladas em `tests/test-tmp/`.
 Não utilize `--basetemp` relativo ou dentro do repositório.
 
 Os testes cobrem: três categorias dev, negativos dev, chuva com dúvida temporal, nomes neutros, mesma cor/cinza, blob fundido, evidências contínuas, geometria de faixa, parâmetros compartilhados, matriz variável, contratos JSON, decisão humana, persistência/exportação, timeout e recuperação do modelo, 90 comandos novos após o anel lotar, duplicata recente e tombstone, fases e JSON de estado, integração offline completa. Os quatro negativos e os seis acidentes também são confrontados pelo avaliador, independentemente de passarem nos testes dev. Testes não usam rótulos finais para ajustar o detector.

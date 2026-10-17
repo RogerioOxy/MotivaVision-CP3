@@ -63,12 +63,20 @@ def test_report_links_images_and_single_link_registry():
     assert '@page{size:A4' in source and 'class="cover"' in source and 'class="toc"' in source
     assert 'Rogério Deligi Ferreira Filho' in source and 'RM562686' in source
     assert '\ufffd' not in source
-    old_marker = 'PENDENTE_' + 'EVIDENCIA_WOKWI'
-    link_marker = 'PENDENTE_' + 'LINK_WOKWI'
+    project_url = 'https://wokwi.com/projects/478084264348027905'
+    assert refs.links.count(project_url) >= 3  # Capa, roteiro e seção de links.
+    cover = source.split('<div class="cover">', 1)[1].split('</div>', 1)[0]
+    links_section = source.split('Referências de implementação', 1)[1]
+    repository_url = 'https://github.com/RogerioOxy/MotivaVision-CP3'
+    for section in [cover, links_section]:
+        for url in [repository_url, project_url]:
+            assert f'<a href="{url}">{url}</a>' in section
+    for name in ['README.md', 'docs/LINKS.md', 'docs/WOKWI.md']:
+        assert project_url in (ROOT / name).read_text(encoding='utf8'), name
+    instructions = (ROOT / 'docs/WOKWI.md').read_text(encoding='utf8')
+    assert '## Recriar o projeto a partir de esp32/' in instructions
+    assert all(name in instructions for name in ['sketch.ino', 'diagram.json', 'libraries.txt'])
     files = [ROOT / 'README.md', *list((ROOT / 'docs').rglob('*.md')), report, ROOT / 'tools/build_report.py']
-    hits = []
+    import re
     for path in files:
-        text = path.read_text(encoding='utf8')
-        assert old_marker not in text, path
-        hits.extend([path.relative_to(ROOT).as_posix()] * text.count(link_marker))
-    assert hits == ['docs/LINKS.md', 'docs/relatorio/relatorio.html']
+        assert not re.search(r'PENDENTE[_A-Z]+', path.read_text(encoding='utf8')), path

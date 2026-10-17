@@ -109,5 +109,5 @@ def test_dev_final_equivalence_after_hash_migration(tmp_path, monkeypatch):
     report = dict(semantics_identical=True, parameters_identical=True,
                   excluded_volatile_fields=['event_id', 'timestamp', 'quadro', 'processing_s'],
                   comparisons=comparisons)
-    (ROOT / 'data/results/eol-equivalence.json').write_text(
+    (tmp_path / 'eol-equivalence.json').write_text(
         json.dumps(report, indent=2, ensure_ascii=False) + '\n', encoding='utf-8', newline='\n')

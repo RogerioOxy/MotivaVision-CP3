@@ -26,11 +26,11 @@ def load(path):
 
 
 def wokwi_link():
-    """O cadastro único fornece link direto após ser preenchido."""
+    """Lê o endereço público do projeto no cadastro de links."""
     match = re.search(r'https://wokwi\.com/projects/[^\s)]+', read('docs/LINKS.md'))
     if match:
-        return f'[Projeto Wokwi]({match.group(0)})'
-    return 'PENDENTE_' + 'LINK_WOKWI'
+        return f'[{match.group(0)}]({match.group(0)})'
+    raise ValueError('Endereço do projeto Wokwi ausente em docs/LINKS.md')
 
 
 def embed(path):
@@ -141,7 +141,7 @@ def traceability(tests):
         ('evidências, figuras e oito testes', 'tools/report_integration.py', 'def mandatory_rows',
          'test_documentation_evidence', 'docs/evidencias/integracao; linhas calculadas dos JSON/TXT, sem resultados editados à mão'),
         ('links e recriação Wokwi', 'docs/WOKWI.md', '## Recriar',
-         'test_report_links', 'docs/LINKS.md: único marcador do endereço; esp32 preservado'),
+         'test_report_links', 'docs/LINKS.md: endereço público; recriação a partir de esp32/'),
         ('rubrica, limitações e indicador', 'docs/INTEGRACAO.md', '## Erros',
          'test_documentation_evidence', 'Cenas sintéticas, final 4/6, contagem 3≠2, M3 e melhoria proposta; sem alterar detector'),
         ('capa, sumário e A4', 'docs/relatorio/relatorio.html', '@page',
@@ -260,7 +260,7 @@ Turma 2CCPW • FIAP • Prof. Marcelo Fernando Morgantini • 16/10/2026
 Protótipo com dados e recursos fictícios; recomendações não constituem protocolo médico.
 
 
-Repositório: [RogerioOxy/MotivaVision-CP3](https://github.com/RogerioOxy/MotivaVision-CP3).  
+Repositório: [https://github.com/RogerioOxy/MotivaVision-CP3](https://github.com/RogerioOxy/MotivaVision-CP3).  
 Projeto Wokwi: {wokwi_link()}.
 
 Coleta real do simulador: 16/10/2026, 18:37–18:44 (−03:00).  
@@ -441,8 +441,8 @@ Referências de implementação (links não consultados na execução offline):
 - [Eclipse Paho](https://eclipse.dev/paho/files/paho.mqtt.python/html/): transporte MQTT Python.
 - [Flask](https://flask.palletsprojects.com/), [SQLite/Python](https://docs.python.org/3/library/sqlite3.html), [pytest](https://docs.pytest.org/).
 - [PubSubClient](https://pubsubclient.knolleary.net/api), [ArduinoJson v7](https://arduinojson.org/v7/), [Wokwi](https://docs.wokwi.com/).
-- [Repositório](https://github.com/RogerioOxy/MotivaVision-CP3), endereço fornecido; disponibilidade não consultada sem rede.
-- [Cadastro Wokwi](../LINKS.md#wokwi); [recriação da montagem](../WOKWI.md).
+- Repositório: [https://github.com/RogerioOxy/MotivaVision-CP3](https://github.com/RogerioOxy/MotivaVision-CP3), endereço fornecido; disponibilidade não consultada sem rede.
+- {wokwi_link()}; [cadastro Wokwi](../LINKS.md#wokwi); [recriação da montagem](../WOKWI.md).
 
 ## Anexo A. Quadros anotados gerados da execução
 

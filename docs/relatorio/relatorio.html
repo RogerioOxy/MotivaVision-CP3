@@ -31,8 +31,8 @@ a{color:inherit}th,pre{-webkit-print-color-adjust:exact;print-color-adjust:exact
 <strong>Maria Fernanda Garavelli Dantas — RM562686</strong><br />
 Turma 2CCPW • FIAP • Prof. Marcelo Fernando Morgantini • 16/10/2026</p>
 <p>Protótipo com dados e recursos fictícios; recomendações não constituem protocolo médico.</p>
-<p>Repositório: <a href="https://github.com/RogerioOxy/MotivaVision-CP3">RogerioOxy/MotivaVision-CP3</a>.<br />
-Projeto Wokwi: PENDENTE_LINK_WOKWI.</p>
+<p>Repositório: <a href="https://github.com/RogerioOxy/MotivaVision-CP3">https://github.com/RogerioOxy/MotivaVision-CP3</a>.<br />
+Projeto Wokwi: <a href="https://wokwi.com/projects/478084264348027905">https://wokwi.com/projects/478084264348027905</a>.</p>
 <p>Coleta real do simulador: 16/10/2026, 18:37–18:44 (−03:00).<br />
 Avaliação final preservada: <strong>4/6</strong>. Dados inteiramente sintéticos.</p>
 </div>
@@ -164,8 +164,9 @@ O painel não substitui a reprodução temporal de cada vídeo.</p>
 <p>Firmware executado no simulador em 16/10/2026, 18:37–18:44 (−03:00).
 O registro do ensaio indica compilação sem erros e início sem aviso de Wi-Fi;
 o log integral de compilação não foi preservado.
-Resultados e limites: <a href="../INTEGRACAO.md">INTEGRACAO.md</a>. O endereço compartilhável
-fica no <a href="../LINKS.md#wokwi">cadastro de links, seção Wokwi</a>.</p>
+Resultados e limites: <a href="../INTEGRACAO.md">INTEGRACAO.md</a>.
+<a href="https://wokwi.com/projects/478084264348027905">Abra o projeto público no Wokwi</a>.
+O endereço também consta no <a href="../LINKS.md#wokwi">cadastro de links</a>.</p>
 <h4 id="recriar-o-projeto-a-partir-de-esp32">Recriar o projeto a partir de esp32/</h4>
 <ol>
 <li>No Wokwi, crie um projeto Arduino <strong>ESP32 DevKit v1</strong>.</li>
@@ -177,7 +178,7 @@ fica no <a href="../LINKS.md#wokwi">cadastro de links, seção Wokwi</a>.</p>
    prefixo <code>motiva/561942/</code> igual ao da central.</li>
 <li>Com rede, inicie <code>.venv/Scripts/python -m central.app</code>, compile e inicie
    a simulação. Abra <code>http://127.0.0.1:5000</code> e espere NORMAL após heartbeat.</li>
-<li>Salve na conta do responsável, copie o link compartilhável para o cadastro.</li>
+<li>Para preservar uma recriação, salve uma cópia na sua conta do Wokwi.</li>
 </ol>
 <h4 id="ligacoes">Ligações</h4>
 <table>
@@ -619,7 +620,7 @@ permanece disponível na captura original e nas exportações JSON/CSV.</p>
 <figure class="integration central"><a href="../evidencias/integracao/09_central_sem_contato.png"><img src="../evidencias/integracao/09_central_sem_contato.png" alt="Central real: FALHA/SEM CONTATO durante a desconexão injetada."></a><figcaption>Figura I8. Central real: FALHA/SEM CONTATO durante a desconexão injetada. Captura: central operacional, 16/10/2026. <a href="../evidencias/integracao/09_central_sem_contato.png">Original</a>.</figcaption></figure>
 
 <h2 id="7-resultados-reais-dev-separado-do-final">7. Resultados reais: dev separado do final</h2>
-<p>Congelamento: 2026-10-16T17:59:37.711-03:00. Detector SHA-256: <code>1f6e0911180b4c5aa1dcbc37757f8c81bfb374db4ac0b8b32c8e23148bc984de</code>.
+<p>Congelamento: 2026-10-16T17:59:37.711-03:00. Detector SHA-256: <code>47521ac36b664acec0a6e75d7856bad5603904c4f60ee48a87924d934caeb770</code>.
 Hashes de fontes, manifesto e vídeos ficam em calibration.json. O relatório recusa
 fontes diferentes do congelamento. O diagnóstico dos erros só lê imagens com o detector
 inalterado; não é uma nova calibração. Pesos e limiar foram escolhidos antes do final.</p>
@@ -638,7 +639,7 @@ suas unidades; os quadros anotados estão no Anexo A.</p>
 <table><thead><tr><th>Teste obrigatório</th><th>Esperado</th><th>Obtido</th><th>Evidência</th><th>Passou</th></tr></thead><tbody><tr><td>1. Três categorias</td><td>Reconhecer seis acidentes, dois de cada tipo.</td><td>5/6; dev 3/3, final 2/3; seq02 LATERAL → SEM ACIDENTE.</td><td>data/results/dev.json; final.json; tests/test_vision.py::test_dev_temporal_accidents</td><td>PARCIAL</td></tr><tr><td>2. Tráfego sem acidente</td><td>Quatro negativos sem ocorrência.</td><td>4/4; 0 eventos nos negativos.</td><td>data/results/dev.json; final.json; 07_detector_seq01.json</td><td>SIM</td></tr><tr><td>3. Visibilidade prejudicada</td><td>Explicitar INDETERMINADO e revisão humana.</td><td>1/2; seq03 0,284/M0; seq09 → SEM ACIDENTE.</td><td>07_detector_seq03.json; data/results/final.json</td><td>PARCIAL</td></tr><tr><td>4. Ocorrência persistente</td><td>Um event_id por episódio nas sequências.</td><td>6 sequências com evento; contagens: [1, 1, 1, 1, 1, 1].</td><td>data/results/dev.json; final.json; tests/test_vision.py::test_spatiotemporal_deduplication</td><td>SIM</td></tr><tr><td>5. Decisões humanas</td><td>Confirmar/rejeitar, identificar operador e aplicar.</td><td>4 decisões; 7 comandos APLICADO; rejeição → NORMAL (5 atuações).</td><td>03_status_confirmado.json; 06_status_rejeitado.json; 10_historico.json</td><td>SIM</td></tr><tr><td>6. Comunicação indisponível</td><td>FALHA e recuperação automática.</td><td>LWT/SEM CONTATO; idade 24.2 s; depois SUSPEITA/EM CONTATO. Heartbeat: foto + diário.</td><td>08_wokwi_falha_sem_heartbeat.jpg; 09_status_1.json; 09_status_3.json; log.txt</td><td>SIM (injeção)</td></tr><tr><td>7. Comando duplicado</td><td>ACK repetido sem repetir atuação; encerrado não reabre.</td><td>3 RECEBIDO + 3 APLICADO; atuações 2 → 2; reabertura: 3 RECUSADO, NORMAL.</td><td>04_acks_duplicado.txt; 04_status_apos_duplicado.json; 05_acks_reabrir.txt; log.txt</td><td>SIM</td></tr><tr><td>8. Integração completa</td><td>Vídeo → MQTT → central → ESP32 → ACK.</td><td>seq04 TRASEIRA → SUSPEITA → CONFIRMADO; 3 eventos, 7 comandos e 14 ACKs no fechamento.</td><td>02_detector_seq04.json; 02_status_suspeita.json; 03_status_confirmado.json; 10_historico.json</td><td>SIM</td></tr></tbody></table>
 
 <h3 id="suite-automatizada">Suíte automatizada</h3>
-<p>64 testes passaram; código de saída = 0.
+<p>67 testes passaram; código de saída = 0.
 O registro completo de cada teste está em <code>data/results/pytest.json</code>, e a saída
 literal em <code>data/results/pytest.txt</code>. A suíte usa transporte em memória,
 modelo do dispositivo e cliente de teste Flask; não substitui o ensaio Wokwi.
@@ -695,8 +696,8 @@ sem cabeçalhos/rodapés; inspecionar todas as páginas após exportar.</p>
 <li><a href="https://eclipse.dev/paho/files/paho.mqtt.python/html/">Eclipse Paho</a>: transporte MQTT Python.</li>
 <li><a href="https://flask.palletsprojects.com/">Flask</a>, <a href="https://docs.python.org/3/library/sqlite3.html">SQLite/Python</a>, <a href="https://docs.pytest.org/">pytest</a>.</li>
 <li><a href="https://pubsubclient.knolleary.net/api">PubSubClient</a>, <a href="https://arduinojson.org/v7/">ArduinoJson v7</a>, <a href="https://docs.wokwi.com/">Wokwi</a>.</li>
-<li><a href="https://github.com/RogerioOxy/MotivaVision-CP3">Repositório</a>, endereço fornecido; disponibilidade não consultada sem rede.</li>
-<li><a href="../LINKS.md#wokwi">Cadastro Wokwi</a>; <a href="../WOKWI.md">recriação da montagem</a>.</li>
+<li>Repositório: <a href="https://github.com/RogerioOxy/MotivaVision-CP3">https://github.com/RogerioOxy/MotivaVision-CP3</a>, endereço fornecido; disponibilidade não consultada sem rede.</li>
+<li><a href="https://wokwi.com/projects/478084264348027905">https://wokwi.com/projects/478084264348027905</a>; <a href="../LINKS.md#wokwi">cadastro Wokwi</a>; <a href="../WOKWI.md">recriação da montagem</a>.</li>
 </ul>
 <h2 id="anexo-a-quadros-anotados-gerados-da-execucao">Anexo A. Quadros anotados gerados da execução</h2>
 <h3 id="registros-de-execucao-e-rastreabilidade">Registros de execução e rastreabilidade</h3>
@@ -706,5 +707,5 @@ sem cabeçalhos/rodapés; inspecionar todas as páginas após exportar.</p>
 A <a href="../RASTREABILIDADE.md">matriz de rastreabilidade</a> contém a relação detalhada
 entre requisitos, implementação, testes e evidências.</p>
 <div class="evidence-grid">
-<figure><img src='../../data/evidence/b44016a4-40bd-4ccd-b843-947c97df3375.jpg'><figcaption>seq03.mp4 — INDETERMINADO — 4.6 s</figcaption></figure><figure><img src='../../data/evidence/f1628558-c952-4955-b41e-4af2e0582846.jpg'><figcaption>seq04.mp4 — TRASEIRA — 3.15 s</figcaption></figure><figure><img src='../../data/evidence/85b1131d-9bfb-4294-867e-118eb4d7aebb.jpg'><figcaption>seq08.mp4 — LATERAL — 4.1 s</figcaption></figure><figure><img src='../../data/evidence/749c36ea-cbbd-4583-8142-977810acce0f.jpg'><figcaption>seq11.mp4 — FRONTAL — 5.4 s</figcaption></figure><figure><img src='../../data/evidence/e2e1df31-7e5d-4eee-b8da-6f2e2204f781.jpg'><figcaption>seq06.mp4 — FRONTAL — 3.95 s</figcaption></figure><figure><img src='../../data/evidence/f7ebfd44-ce7a-40fa-82aa-185ae04682f3.jpg'><figcaption>seq10.mp4 — TRASEIRA — 4.65 s</figcaption></figure>
+<figure><img src='../../data/evidence/b44016a4-40bd-4ccd-b843-947c97df3375.jpg'><figcaption>seq03.mp4 — INDETERMINADO — 4.6 s</figcaption></figure><figure><img src='../../data/evidence/f1628558-c952-4955-b41e-4af2e0582846.jpg'><figcaption>seq04.mp4 — TRASEIRA — 3.15 s</figcaption></figure><figure><img src='../../data/evidence/85b1131d-9bfb-4294-867e-118eb4d7aebb.jpg'><figcaption>seq08.mp4 — LATERAL — 4.1 s</figcaption></figure><figure><img src='../../data/evidence/749c36ea-cbbd-4583-8142-977810acce0f.jpg'><figcaption>seq11.mp4 — FRONTAL — 5.4 s</figcaption></figure><figure><img src='../../data/evidence/754c835a-44fc-46f6-969e-44c93ee55487.jpg'><figcaption>seq06.mp4 — FRONTAL — 3.95 s</figcaption></figure><figure><img src='../../data/evidence/565af182-27f7-48c5-ad8d-ad462b8e6125.jpg'><figcaption>seq10.mp4 — TRASEIRA — 4.65 s</figcaption></figure>
 </div></body></html>

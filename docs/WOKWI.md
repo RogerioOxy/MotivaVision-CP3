@@ -3,8 +3,9 @@
 Firmware executado no simulador em 16/10/2026, 18:37–18:44 (−03:00).
 O registro do ensaio indica compilação sem erros e início sem aviso de Wi-Fi;
 o log integral de compilação não foi preservado.
-Resultados e limites: [INTEGRACAO.md](INTEGRACAO.md). O endereço compartilhável
-fica no [cadastro de links, seção Wokwi](LINKS.md#wokwi).
+Resultados e limites: [INTEGRACAO.md](INTEGRACAO.md).
+[Abra o projeto público no Wokwi](https://wokwi.com/projects/478084264348027905).
+O endereço também consta no [cadastro de links](LINKS.md#wokwi).
 
 ## Recriar o projeto a partir de esp32/
 
@@ -17,7 +18,7 @@ fica no [cadastro de links, seção Wokwi](LINKS.md#wokwi).
    prefixo `motiva/561942/` igual ao da central.
 5. Com rede, inicie `.venv/Scripts/python -m central.app`, compile e inicie
    a simulação. Abra `http://127.0.0.1:5000` e espere NORMAL após heartbeat.
-6. Salve na conta do responsável, copie o link compartilhável para o cadastro.
+6. Para preservar uma recriação, salve uma cópia na sua conta do Wokwi.
 
 ## Ligações
 

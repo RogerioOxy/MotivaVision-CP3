@@ -11,7 +11,7 @@ RESULTS = []
 @pytest.fixture
 def tmp_path():
     """Temporários isolados dentro do projeto."""
-    root = Path("data/results/test-tmp").resolve()
+    root = Path("tests/test-tmp").resolve()
     root.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="case-", dir=root) as folder:
         yield Path(folder)

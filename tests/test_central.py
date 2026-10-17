@@ -214,7 +214,7 @@ def test_full_offline_video_mqtt_central_device_ack(tmp_path):
     assert {a["phase"] for a in data["acks"]} == {"RECEBIDO", "APLICADO"}
     assert device.state == "CONFIRMADO"
     evidence = {"scope": "MQTT em memória e modelo Python; não é Wokwi", "event": event, "history": data, "device_actions": device.actions}
-    Path("data/results/integration_offline.json").write_text(json.dumps(evidence, indent=2, ensure_ascii=False), encoding="utf-8")
+    (tmp_path / "integration_offline.json").write_text(json.dumps(evidence, indent=2, ensure_ascii=False), encoding="utf-8")
 
 def test_command_ring_continues_after_64_and_preserves_closed(tmp_path, event):
     store, bus, bridge, device = setup_system(tmp_path)
@@ -258,9 +258,9 @@ def test_phase_timestamps_status_json_and_screen(tmp_path, event):
                        'APLICADO pelo ESP32', 'Regra M4', 'CONFIRMADA']:
             assert phrase in page
         assert all(value in page for value in phases.values())
-        Path('data/results/central-status.json').write_text(
+        (tmp_path / 'central-status.json').write_text(
             json.dumps(status, indent=2, ensure_ascii=False), encoding='utf8')
-        Path('data/results/central-screen.html').write_text(page, encoding='utf8')
+        (tmp_path / 'central-screen.html').write_text(page, encoding='utf8')
 
 
 def test_rules_combine_type_and_variable_indicator(event):
